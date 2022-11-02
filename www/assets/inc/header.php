@@ -1,7 +1,6 @@
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/eventhaandteringssystem/www/assets/css/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="/eventhaandteringssystem/www/assets/css/styles.css">
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="/eventhaandteringssystem/www/index.php">Arr!</a>
@@ -17,7 +16,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="/eventhaandteringssystem/www/createevent.php">Opprett arrangement</a>
       </li>
-      
+
       <li class="nav-item active">
         <a class="nav-link" href="/eventhaandteringssystem/www/minside.php">Min side</a>
       </li>
