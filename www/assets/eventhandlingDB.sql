@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 01. Nov, 2022 12:48 PM
+-- Generation Time: 02. Nov, 2022 11:28 AM
 -- Tjener-versjon: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `eventhandling`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur for tabell `bookings`
+--
+
+CREATE TABLE `bookings` (
+  `booking_id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `event_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dataark for tabell `bookings`
+--
+
+INSERT INTO `bookings` (`booking_id`, `user_id`, `event_id`) VALUES
+(1, 2, 2),
+(2, 1, 3),
+(3, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -124,6 +145,14 @@ INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `phone`, `pa
 --
 
 --
+-- Indexes for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`booking_id`),
+  ADD KEY `booking_user_id` (`user_id`),
+  ADD KEY `booking_event_id` (`event_id`);
+
+--
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
@@ -162,6 +191,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `bookings`
+--
+ALTER TABLE `bookings`
+  MODIFY `booking_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
@@ -188,6 +223,13 @@ ALTER TABLE `users`
 --
 -- Begrensninger for dumpede tabeller
 --
+
+--
+-- Begrensninger for tabell `bookings`
+--
+ALTER TABLE `bookings`
+  ADD CONSTRAINT `booking_event_id` FOREIGN KEY (`event_id`) REFERENCES `events` (`event_id`),
+  ADD CONSTRAINT `booking_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Begrensninger for tabell `events`
