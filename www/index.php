@@ -4,7 +4,7 @@ require __DIR__."/assets/lib/class.Event.php";
 require __DIR__."/assets/lib/class.Display.php";
 ?>
 <div class="headline">
-    Velkommen til Arr!
+    <text>Velkommen til Arr!</text>
 </div>
 
 <?php

@@ -19,9 +19,11 @@
 }
 
 .headline{
+    display: flex;
     font-size: 30px;
     font-weight: 600;
     color: var(--text-dark);
+    justify-content: center;
 }
 
 .bg-primary{
@@ -43,4 +45,18 @@
     color: var(--header-bg);
     background-color: var(--text-light);
     border-color: var(--text-light);
+}
+
+.flex-container{
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center;
+}
+
+.card-footer{
+    padding-left: 1.25rem;
+    padding-bottom: 1.25rem;
+    background-color: rgba(0,0,0,0);
+    border-top: 1px solid rgba(0,0,0,0);
 }
