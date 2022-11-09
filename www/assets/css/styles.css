@@ -1,7 +1,7 @@
 :root {
     --text-dark: black;
     --text-light: white;
-    --main-bg: white;
+    --main-bg: cyan;
     --header-bg: navy;
   }
   
@@ -22,8 +22,9 @@
     display: flex;
     font-size: 30px;
     font-weight: 600;
-    color: var(--text-dark);
+    color: var(--text-dark) !important;
     justify-content: center;
+    padding: 20px 0px !important;
 }
 
 .bg-primary{

@@ -2,14 +2,38 @@
 require __DIR__."/class.DbConn.php";
 
 class Event{
-    function getAllEvents(){
+    function getEvents($number){
+        $dbConn = new DbConn();
+        $conn = $dbConn->connect();
+
+        if($number == null){
+            $limit = ";";
+        }
+        else{
+            $limit = " LIMIT $number;";
+        }
+
+        $sql = "SELECT event_id, title, info, first_name, last_name, location, time, name, endtime, ticketprice, website
+        FROM eventhandling.events
+        INNER JOIN eventhandling.users ON users.user_id = events.host
+        INNER JOIN eventhandling.categories ON categories.category_id = events.category_id 
+        ORDER BY time ASC" . 
+        $limit;
+
+        $result = $conn->query($sql);
+
+        return $result;
+    }
+
+    function singleEvent($event_id){
         $dbConn = new DbConn();
         $conn = $dbConn->connect();
 
         $sql = "SELECT event_id, title, info, first_name, last_name, location, time, name, endtime, ticketprice, website
         FROM eventhandling.events
         INNER JOIN eventhandling.users ON users.user_id = events.host
-        INNER JOIN eventhandling.categories ON categories.category_id = events.category_id;";
+        INNER JOIN eventhandling.categories ON categories.category_id = events.category_id 
+        WHERE event_id = $event_id;";
 
         $result = $conn->query($sql);
 
