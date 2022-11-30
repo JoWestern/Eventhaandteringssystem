@@ -4,6 +4,17 @@
     --main-bg: cyan;
     --header-bg: navy;
   }
+
+.navbar{
+    position:fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.main{
+    margin-top: 62px;
+}
   
 
 .login{
@@ -55,9 +66,51 @@
     justify-content: center;
 }
 
+.card-img{
+    display: flex;
+    justify-content: center;
+}
+
+.card-img img{
+    max-height: 250px;
+    max-width: 250px;
+    width: auto;
+}
+
 .card-footer{
     padding-left: 1.25rem;
     padding-bottom: 1.25rem;
     background-color: rgba(0,0,0,0);
     border-top: 1px solid rgba(0,0,0,0);
+}
+
+.event-page{
+    display: flex;
+    flex-direction: column;
+}
+
+.event-page-title{
+    width: 100%;
+    text-align: center;
+}
+
+.event-page-content-middle{
+    display: flex;
+    flex-direction: row;
+}
+
+.event-page-content-right{
+    margin: 15px;
+}
+
+.event-page img{
+    max-height:500px;
+    max-width:500px;
+    height:auto;
+    width:auto;
+    margin: 15px;
+}
+
+.event-page-content-bottom{
+    margin: 15px;
 }

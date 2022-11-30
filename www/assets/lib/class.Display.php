@@ -8,7 +8,9 @@
                 //echo each row from table
                 while($row = $result->fetch_assoc()) {
                     $datetime = new DateTimeImmutable($row['time']);
-                    $img = "assets/img/event" . $row['event_id'] . ".jpg";
+
+                    if(file_exists("assets/img/event" . $row['event_id'] . ".jpg")) $img = $img = "assets/img/event" . $row['event_id'] . ".jpg";
+                    else $img = "assets/img/stock.png";
                     
                     echo "
                     <div class=\"card\" style=\"width: 18rem;\">
@@ -17,7 +19,7 @@
                     </div>
                     <div class=\"card-body d-flex flex-column\">
                         <h5 class=\"card-title\">" . $row["title"] . "</h5>
-                        <p class=\"card-text\">" . $row["info"] . "</p>
+                        <p class=\"card-text\">" . substr($row["info"],0,200) . "...</p>
                         <p class=\"card-text\">" . $datetime->format('j.') . " " . self::translateMonth($datetime->format('F')) . " " . $datetime->format('Y') . " kl. " . $datetime->format('H:i') . "</p>
                     </div>
                     <div class=\"card-footer\">
@@ -25,19 +27,6 @@
                     </div>
                     </div>
                     ";
-
-                    // "<tr>
-                    // <td>" . $row["event_id"] . "</td>
-                    // <td>" . $row["title"] . "</td>
-                    // <td>" . $row["info"] . "</td>
-                    // <td>" . $row["first_name"] . " " . $row["last_name"] . "</td>
-                    // <td>" . $row["location"] . "</td>
-                    // <td>" . $row["time"] . "</td>
-                    // <td>" . $row["endtime"] . "</td>
-                    // <td>" . $row["name"] . "</td>
-                    // <td>" . $row["ticketprice"] . "</td>
-                    // <td>" . $row["website"] . "</td>
-                    // </tr>";
                 }
                 echo "</div>";
                 }

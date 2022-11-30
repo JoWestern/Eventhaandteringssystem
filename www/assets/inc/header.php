@@ -12,7 +12,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link active" href="/eventhaandteringssystem/www/index.php">Arrangementer</a>
+        <a class="nav-link active" href="/eventhaandteringssystem/www/allEvents.php">Alle arrangementer</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="/eventhaandteringssystem/www/createevent.php">Opprett arrangement</a>
