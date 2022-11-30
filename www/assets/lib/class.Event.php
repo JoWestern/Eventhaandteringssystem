@@ -39,5 +39,30 @@ class Event{
 
         return $result;
     }
+
+    function createEvent($title, $info, $host, $location, $time, $category_id)
+    {
+        $dbConn = new DbConn();
+        $conn = $dbConn->connect();
+        // $sql = "INSERT INTO events 
+        // (event_id, title, info, host, location, time, category_id) 
+        // VALUES 
+        // (?,?,?,?,?,?,?)";
+
+        $stmt = $conn->prepare(
+            "INSERT INTO eventhandling.events 
+            (title, info, host, location, time, category_id) 
+            VALUES 
+            (?,?,?,?,?,?)"
+        );
+
+        $stmt->bind_param('ssssss', $title, $info, $host, $location, $time, $category_id);
+        $stmt->execute();
+
+        echo "Data inserted";
+
+        $stmt->close();
+        $conn->close();
+    }
 }
 ?>
