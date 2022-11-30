@@ -37,7 +37,6 @@ require dirname(__DIR__) . "/www/assets/lib/class.Event.php";
 <?php
 if (isset($_POST["submit"])) {
     // legge inn check for hvert felt
-
     $title = $_POST['title'];
     $info = $_POST['bio'];
     $location = $_POST['local'];
