@@ -1,6 +1,6 @@
 <?php 
 include "./assets/inc/header.php";
-include "./assets/lib/class.User.php";
+require __DIR__."/assets/lib/class.User.php";
 
 // session_start();
 // // Check if the user is already logged in, if yes then redirect him to welcome page
@@ -32,20 +32,11 @@ include "./assets/lib/class.User.php";
         </div>
     </body>
 <?php  
-
     $arrayInput = array();
     $arrayErr = array();
-    // INSERT
-    // $sql = "SELECT user_username, user_password FROM login 
-    // WHERE user_username = :user_username AND user_password = :user_password";
+    $username = $password = "";
 
-    // $q->bindParam(':user_password', $password, PDO::PARAM_STR);
-    //$q->bindParam('user_userid', $userid, PDO::PARAM_INT);
-
-    // $sql2 = "SELECT user_userid FROM login 
-    // WHERE user_username = :user_username";
-    // $q2 = $pdo->prepare($sql);
-    // $q2->bindParam(':user_username', $username, PDO::PARAM_STR);
+    if (isset($_POST["login"])) {
         //sjekker om navnefeltet er tomt.
         if (empty($_POST["username"])) {
             $arrayErr["nameErr"] = "Username is required";
@@ -54,7 +45,6 @@ include "./assets/lib/class.User.php";
             // input er riktig og blir lagt inn i array
             $arrayInput["username"] = $_POST["username"];
             $username = $_POST['username'];
-            
         }
         // de tre neste kodeblokkene opperer på samme måte som den over.
         if (empty($_POST["password"])) {
@@ -62,28 +52,18 @@ include "./assets/lib/class.User.php";
         } else {
             $arrayInput["password"] = $_POST["password"];
             $inputPassword = $_POST['password'];
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            echo $password;
+            $password = $_POST["password"];
         }
-
         // hvis error-matrisen ikke er tom, print feil
-        // if (!(empty($arrayErr))) {
-        //     foreach ($arrayErr as  $value) {
-        //         echo "Error: $value <br>";
-        //         echo "Data were not inserted into database.<br>";
-        //     }
-        // } else {
-        //     // hvis det ikke er noen feil, print input-verdiene
-        //     foreach ($arrayInput as $key => $value) {
-        //         echo "$key: $value <br>";
-        //     }
-        // }
-
-        if (isset($_POST["login"])) {
-            $user = new User();
-            $user->validateUser($username, $password);
-        
+        if (!(empty($arrayErr))) {
+            foreach ($arrayErr as  $value) {
+                echo "$value <br>";
+            }
+        } else {
+            $users = new User();
+            $validateUser = $users->validateUser($username, $password);
         }
+    }
 
 
 if (isset($_POST["register"])) {

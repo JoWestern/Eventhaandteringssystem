@@ -1,6 +1,7 @@
 <?php
 require dirname(__DIR__) . "/www/assets/inc/header.php";
 require dirname(__DIR__) . "/www/assets/lib/class.Event.php";
+require __DIR__."/assets/inc/authenticate.php";
 ?>
 <body class="">
     <div class="container login mt-5" style="width: fit-content">
