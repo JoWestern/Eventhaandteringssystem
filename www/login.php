@@ -12,22 +12,21 @@ require __DIR__."/assets/lib/class.User.php";
     <body class="text-center">
         <div class="container login" style="width: fit-content">
             <main class="form-signin w-100 m-auto">
-                <form method="POST" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> autocomplete="off">
-                <br>
-                <br><!-- MÅ FORBEDRES  -->
-                <br>    
-                <h1 class="h3 mb-3 fw-normal">Logg inn</h1>
-                    <div class="form-floating">
-                        <input type="text" id="username" name="username" placeholder="E-post" autocomplete="off">
-                    </div>
-                    <div class="form-floating">
-                        <input type="text" id="password" name="password" placeholder="Passord" autocomplete="off">
-                    </div>
+                <div class="main">
+                    <form method="POST" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> autocomplete="off">  
+                        <h1 class="h3 mb-3 fw-normal">Logg inn</h1>
+                        <div class="form-floating">
+                            <input type="text" id="username" name="username" placeholder="E-post" autocomplete="off">
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" id="password" name="password" placeholder="Passord" autocomplete="off">
+                        </div>
 
-                    <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="login" value="Logg inn" autocomplete="off" />
-                    <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="register" value="Registrer" autocomplete="off" />
-                    <p class="mt-5 mb-3 text-muted">© 2022</p>
-                </form>
+                        <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="login" value="Logg inn" autocomplete="off" />
+                        <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="register" value="Registrer" autocomplete="off" />
+                        <p class="mt-5 mb-3 text-muted">© 2022</p>
+                    </form>
+                </div>
             </main>
         </div>
     </body>

@@ -2,34 +2,34 @@
 require dirname(__DIR__) . "/www/assets/inc/header.php";
 require dirname(__DIR__) . "/www/assets/lib/class.User.php";
 ?>
-<body class="">
-    <br>
-    <div class="container login mt-5" style="width: fit-content">
-        <form method="POST" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> autocomplete="off">
-            <h1 class="h3 mb-3 fw-normal">Registrer bruker</h1>
-            <label for="firstname">Fornavn:</label>
-            <div class="form-floating">
-                <input type="text" id="firstname" name="firstname" autocomplete="off">
-            </div>
-            <label for="lastname">Etternavn:</label>
-            <div class="form-floating">
-                <input type="text" id="lastname" name="lastname" autocomplete="off">
-            </div>
-            <label for="email">E-post:</label>
-            <div class="form-floating">
-                <input type="text" id="email" name="email" autocomplete="off">
-            </div>
-            <label for="password">Passord:</label>
-            <div class="form-floating">
-                <input type="password" id="password" name="password" autocomplete="off">
-            </div>
-            <label for="phone">Telefonnummer:</label>
-            <div class="form-floating">
-                <input type="number" id="phone" name="phone" autocomplete="off">
-            </div>
-            <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="submit" value="Registrer" autocomplete="off"></input>
-            <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="login" value="til login" autocomplete="off" />
-        </form>
+<body class="text-center">
+        <div class="container login mt-5" style="width: fit-content">
+            <form method="POST" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> autocomplete="off">
+                <h1 class="h3 mb-3 fw-normal">Registrer bruker</h1>
+                <label for="firstname">Fornavn:</label>
+                <div class="form-floating">
+                    <input type="text" id="firstname" name="firstname" autocomplete="off">
+                </div>
+                <label for="lastname">Etternavn:</label>
+                <div class="form-floating">
+                    <input type="text" id="lastname" name="lastname" autocomplete="off">
+                </div>
+                <label for="email">E-post:</label>
+                <div class="form-floating">
+                    <input type="text" id="email" name="email" autocomplete="off">
+                </div>
+                <label for="password">Passord:</label>
+                <div class="form-floating">
+                    <input type="password" id="password" name="password" autocomplete="off">
+                </div>
+                <label for="phone">Telefonnummer:</label>
+                <div class="form-floating">
+                    <input type="number" id="phone" name="phone" autocomplete="off">
+                </div>
+                <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="submit" value="Registrer" autocomplete="off"></input>
+                <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="login" value="til login" autocomplete="off" />
+            </form>
+        </div>
     </div>
 </body>
 <?php
