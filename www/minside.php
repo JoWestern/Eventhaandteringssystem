@@ -1,5 +1,6 @@
 <?php 
 require dirname(__DIR__)."/www/assets/inc/header.php";
+require __DIR__."/assets/inc/authenticate.php";
 ?>
 <div class="headline">Min side</div>
 
