@@ -1,9 +1,20 @@
 <?php 
 require dirname(__DIR__)."/www/assets/inc/header.php";
+require __DIR__."/assets/lib/class.Display.php";
+require __DIR__."/assets/lib/class.Booking.php";
 ?>
-<div class="headline">Min side</div>
 
-Ha flere forskjellige soner/bokser med kort som viser f.eks. kommende arrangementer som man er vert for, 
-som man er gjest på, og kanskje også tidligere arrangementer.
+<div class="main">
+<div class="headline">
+    <text>Arrangementer jeg deltar på</text>
+</div>
 
-Må finne ut hvordan vi håndterer hvis det er for mange til å vises.
+<?php
+    $bookings = new Booking();
+    $results = $bookings->getBookings(5,2);
+
+    $display = new Display();
+    $display->displayCards($results);
+
+?>
+</div>

@@ -13,7 +13,7 @@ class Event{
             $limit = " LIMIT $number;";
         }
 
-        $sql = "SELECT event_id, title, info, first_name, last_name, location, time, name, endtime, ticketprice, website
+        $sql = "SELECT event_id, title, info, location, time 
         FROM eventhandling.events
         INNER JOIN eventhandling.users ON users.user_id = events.host
         INNER JOIN eventhandling.categories ON categories.category_id = events.category_id 
@@ -30,7 +30,7 @@ class Event{
         $conn = $dbConn->connect();
 
         $sql = "SELECT event_id, title, info, first_name, last_name, location, time, name, endtime, ticketprice, website
-        FROM eventhandling.events
+        FROM events
         INNER JOIN eventhandling.users ON users.user_id = events.host
         INNER JOIN eventhandling.categories ON categories.category_id = events.category_id 
         WHERE event_id = $event_id;";

@@ -10,11 +10,19 @@ $event_id = $_REQUEST['event_id'];
 $event = new Event();
 $result = $event->singleEvent($event_id);
 $thisEvent = $result->fetch_object();
+
 $dateFormat = new Display();
+$datetimeStart = new DateTimeImmutable($thisEvent->time);
+$formattedStart = $dateFormat->formatDatetime($datetimeStart);
+
+if($thisEvent->endtime == null) $dateTimeEnd = "";
+else {
+    $datetimeEnd = new DateTimeImmutable($thisEvent->endtime);
+    $formattedEnd = $dateFormat->formatDatetime($datetimeEnd);
+}
+
 if(file_exists("assets/img/event" . $thisEvent->event_id . ".jpg")) $img = "assets/img/event" . $thisEvent->event_id . ".jpg";
 else $img = "assets/img/stock.png";
-$datetimeStart = new DateTimeImmutable($thisEvent->time);
-$datetimeEnd = new DateTimeImmutable($thisEvent->endtime);
 
 echo 
 "<div class='event-page main'>
@@ -29,9 +37,9 @@ echo
             <strong>Vert:<br></strong> $thisEvent->first_name $thisEvent->last_name<br><br>
             <strong>Informasjon:<br></strong> $thisEvent->info<br><br>
             <strong>Sted:<br></strong> $thisEvent->location<br><br>
-            <strong>Tid:<br></strong> " . $datetimeStart->format('j.') . " " . $dateFormat->translateMonth($datetimeStart->format('F')) . " " . $datetimeStart->format('Y') . " kl. " . $datetimeStart->format('H:i') . "<br><br>
+            <strong>Tid:<br></strong> $formattedStart<br><br>
             <strong>Kategori:<br></strong> $thisEvent->name<br><br>
-            <strong>Tid:<br></strong> " . $datetimeEnd->format('j.') . " " . $dateFormat->translateMonth($datetimeEnd->format('F')) . " " . $datetimeEnd->format('Y') . " kl. " . $datetimeEnd->format('H:i') . "<br><br>
+            <strong>Sluttid:<br></strong> $formattedEnd<br><br>
             <strong>Pris:<br></strong> $thisEvent->ticketprice<br><br>
             <strong>Nettside:<br></strong> <a href='$thisEvent->website'>$thisEvent->website</a><br><br>
             <form action=''>
