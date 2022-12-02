@@ -22,7 +22,7 @@ session_start()
       </li>
       
       <li class="nav-item active">
-        <a class="nav-link" href="/eventhaandteringssystem/www/minside.php">Min side</a>
+        <a class="nav-link" href="/eventhaandteringssystem/www/mineArrangementer.php">Mine arrangementer</a>
       </li>
 
       <?php

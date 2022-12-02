@@ -20,9 +20,10 @@
                     <div class=\"card-body d-flex flex-column\">
                         <h5 class=\"card-title\">" . $row["title"] . "</h5>
                         <p class=\"card-text\">" . substr($row["info"],0,200) . "...</p>
-                        <p class=\"card-text\">" . self::formatDatetime($datetime) . "</p>
                     </div>
                     <div class=\"card-footer\">
+                        <p class=\"card-text\"><strong>" . $row["location"] . "</strong></p>
+                        <p class=\"card-text\"><strong>" . self::formatDatetime($datetime) . "</strong></p>
                         <a href=\"event.php?event_id=" . $row['event_id'] . "\" class\"btn btn-primary\">Les mer</a>
                     </div>
                     </div>
@@ -31,7 +32,7 @@
                 echo "</div>";
                 }
                 else {
-                echo "0 results";
+                echo "<div class='no-results'><text>Ingen treff</text><div>";
             }
         }
 

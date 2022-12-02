@@ -44,7 +44,7 @@ function createUser($firstname, $lastname, $email, $phone, $password)
             $_SESSION["USER_ID"] = $user["user_id"];
             $_SESSION["USERNAME"] = $user["email"];
             $_SESSION["LOGGED_IN"] = true;
-            header("Location: minside.php");
+            header("Location: mineArrangementer.php");
             exit();
         }
 
