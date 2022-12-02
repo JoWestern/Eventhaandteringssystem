@@ -1,3 +1,6 @@
+<?php
+session_start()
+?>
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -22,9 +25,13 @@
         <a class="nav-link" href="/eventhaandteringssystem/www/minside.php">Min side</a>
       </li>
 
-      <li class="nav-item active">
-        <a class="nav-link" href="/eventhaandteringssystem/www/logout.php">Logg ut</a>
-      </li>
+      <?php
+      if(isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN'] == true){
+      echo '<li class="nav-item active">
+              <a class="nav-link" href="/eventhaandteringssystem/www/logout.php">Logg ut</a>
+            </li>';
+      }
+      ?>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Søk" aria-label="Search">

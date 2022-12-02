@@ -11,8 +11,10 @@ require __DIR__."/assets/inc/authenticate.php";
 </div>
 
 <?php
+    $user = $_SESSION['USER_ID'];
+    
     $bookings = new Booking();
-    $results = $bookings->getBookings(5,2);
+    $results = $bookings->getBookings(5,$user);
 
     $display = new Display();
     $display->displayCards($results);
