@@ -2,7 +2,7 @@
 require_once __DIR__."/class.DbConn.php";
 
 class Event{
-    function getEvents($number){
+    function getEvents($number, $comingEvents){
         $dbConn = new DbConn();
         $conn = $dbConn->connect();
 
@@ -13,11 +13,16 @@ class Event{
             $limit = " LIMIT $number;";
         }
 
+        if($comingEvents){
+            $time = " AND time >= CURRENT_DATE ";
+        }
+        else $time = " AND time < CURRENT_DATE ";
+
         $sql = "SELECT event_id, title, info, location, time 
         FROM eventhandling.events
-        INNER JOIN eventhandling.users ON users.user_id = events.host
-        INNER JOIN eventhandling.categories ON categories.category_id = events.category_id 
-        ORDER BY time ASC" . 
+        INNER JOIN eventhandling.users ON users.user_id = events.host"
+        . $time .
+        "ORDER BY time ASC" . 
         $limit;
 
         $result = $conn->query($sql);
@@ -64,6 +69,35 @@ class Event{
         echo "Data inserted";
 
         $stmt->close();
+        $conn->close();
+    }
+
+    function eventsByHost($host, $number, $comingEvents){
+        $dbConn = new DbConn();
+        $conn = $dbConn->connect();
+
+        if($number == null){
+            $limit = ";";
+        }
+        else{
+            $limit = " LIMIT $number;";
+        }
+
+        if($comingEvents){
+            $time = " AND time >= CURRENT_DATE ";
+        }
+        else $time = " AND time < CURRENT_DATE ";
+
+        $sql = "SELECT event_id, title, info, location, time 
+        FROM eventhandling.events
+        INNER JOIN eventhandling.users ON users.user_id = events.host
+        WHERE host = $host" . $time . 
+        "ORDER BY time ASC" . 
+        $limit;
+
+        $result = $conn->query($sql);
+
+        return $result;
         $conn->close();
     }
 }

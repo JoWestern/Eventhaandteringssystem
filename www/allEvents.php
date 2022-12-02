@@ -11,7 +11,7 @@ require __DIR__."/assets/inc/authenticate.php";
 
 <?php
     $events = new Event();
-    $results = $events->getEvents(null);
+    $results = $events->getEvents(null, true);
 
     $display = new Display();
     $display->displayCards($results);
