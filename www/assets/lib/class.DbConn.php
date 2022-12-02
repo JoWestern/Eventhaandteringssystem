@@ -5,9 +5,10 @@ function connect(){
     $servername = "localhost";
     $username = "root";
     $password = "";
+    $database = "eventhandling";
 
     //connect
-    $conn = new mysqli($servername, $username, $password);
+    $conn = new mysqli($servername, $username, $password, $database);
 
     //check connection
     if ($conn->connect_error) {

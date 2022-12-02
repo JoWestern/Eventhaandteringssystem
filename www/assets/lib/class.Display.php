@@ -20,7 +20,7 @@
                     <div class=\"card-body d-flex flex-column\">
                         <h5 class=\"card-title\">" . $row["title"] . "</h5>
                         <p class=\"card-text\">" . substr($row["info"],0,200) . "...</p>
-                        <p class=\"card-text\">" . $datetime->format('j.') . " " . self::translateMonth($datetime->format('F')) . " " . $datetime->format('Y') . " kl. " . $datetime->format('H:i') . "</p>
+                        <p class=\"card-text\">" . self::formatDatetime($datetime) . "</p>
                     </div>
                     <div class=\"card-footer\">
                         <a href=\"event.php?event_id=" . $row['event_id'] . "\" class\"btn btn-primary\">Les mer</a>
@@ -50,6 +50,11 @@
                 "November"=>"november",
                 "December"=>"desember"
             };
+        }
+
+        function formatDatetime($datetime){
+            $formattedDatetime = $datetime->format('j.') . " " . self::translateMonth($datetime->format('F')) . " " . $datetime->format('Y') . " kl. " . $datetime->format('H:i');
+            return $formattedDatetime;
         }
     }
 ?>
