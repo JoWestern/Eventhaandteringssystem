@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 30. Nov, 2022 16:00 PM
+-- Generation Time: 02. Des, 2022 17:01 PM
 -- Tjener-versjon: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -38,8 +38,10 @@ CREATE TABLE `bookings` (
 --
 
 INSERT INTO `bookings` (`booking_id`, `user_id`, `event_id`) VALUES
-(1, 2, 2),
 (2, 1, 3),
+(18, 1, 4),
+(19, 1, 7),
+(1, 2, 2),
 (3, 2, 3);
 
 -- --------------------------------------------------------
@@ -102,7 +104,8 @@ INSERT INTO `events` (`event_id`, `title`, `info`, `host`, `location`, `time`, `
 (8, 'Romjulsgløggfest', 'Her skal det drekkas gløgg guttær og jæntær! Ta med ditt feteste krus og ubegrensede mengder pepperkaker.', 2, 'Wergelandsparken/Torvet', '2022-12-23 19:00:00', 6, NULL, '0', NULL),
 (9, 'Gratis dekkskift', 'Kom og få gratis dekkskift. Hvis du er gammel eller av andre grunner ikke klarer å bytte fra vinter- til sommerhjul selv, så gjør vi jobben for deg.', 1, 'Dekkmann Sørlandsparken', '2023-04-01 10:00:00', 7, '2023-04-01 16:00:00', '0', NULL),
 (10, 'TestEvent1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2, 'Lorem Ipsum', '2022-12-21 15:00:00', 8, NULL, '200', 'https://no.wikipedia.org/wiki/Lorem_ipsum'),
-(11, 'TestEvent2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, 'TestLocation', '2022-12-31 12:00:00', 4, NULL, '1000', NULL);
+(11, 'TestEvent2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, 'TestLocation', '2022-12-31 12:00:00', 4, NULL, '1000', NULL),
+(12, 'TestEvent3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2, 'TestLocation', '2022-12-01 15:00:00', 1, '2022-12-01 16:00:00', '500', 'https://no.wikipedia.org/wiki/Lorem_ipsum');
 
 -- --------------------------------------------------------
 
@@ -159,6 +162,7 @@ INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `phone`, `pa
 --
 ALTER TABLE `bookings`
   ADD PRIMARY KEY (`booking_id`),
+  ADD UNIQUE KEY `user_id` (`user_id`,`event_id`),
   ADD KEY `booking_user_id` (`user_id`),
   ADD KEY `booking_event_id` (`event_id`);
 
@@ -204,7 +208,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `booking_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `booking_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -216,7 +220,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `event_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `event_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `preferences`
