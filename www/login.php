@@ -16,7 +16,7 @@ require __DIR__."/assets/lib/class.User.php";
                     <form method="POST" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> autocomplete="off">  
                         <h1 class="h3 mb-3 fw-normal">Logg inn</h1>
                         <div class="form-floating">
-                            <input type="text" id="username" name="username" placeholder="E-post" autocomplete="off">
+                            <input type="email" id="username" name="username" placeholder="E-post" autocomplete="off">
                         </div>
                         <div class="form-floating">
                             <input type="password" id="password" name="password" placeholder="Passord" autocomplete="off">
