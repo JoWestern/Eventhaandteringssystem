@@ -1,16 +1,20 @@
 <?php 
 require dirname(__DIR__)."/www/assets/inc/header.php";
 require dirname(__DIR__)."/www/assets/lib/class.Event.php";
+require dirname(__DIR__)."/www/assets/lib/class.Booking.php";
 require dirname(__DIR__)."/www/assets/lib/class.Display.php";
 require __DIR__."/assets/inc/authenticate.php";
 ?>
 
 <?php
-$event_id = $_REQUEST['event_id'];
+$eventID = $_REQUEST['event_id'];
+$userID = $_SESSION['USER_ID'];
 
 $event = new Event();
-$result = $event->singleEvent($event_id);
+$result = $event->singleEvent($eventID);
 $thisEvent = $result->fetch_object();
+
+$booking = new Booking();
 
 $dateFormat = new Display();
 $datetimeStart = new DateTimeImmutable($thisEvent->time);
@@ -42,15 +46,30 @@ echo
             <strong>Kategori:<br></strong> $thisEvent->name<br><br>
             <strong>Sluttid:<br></strong> $formattedEnd<br><br>
             <strong>Pris:<br></strong> $thisEvent->ticketprice<br><br>
-            <strong>Nettside:<br></strong> <a href='$thisEvent->website'>$thisEvent->website</a><br><br>
-            <form action=''>
-                <input type='submit' value='Meld på!' />
-            </form>
-        </div>
+            <strong>Nettside:<br></strong> <a href='$thisEvent->website'>$thisEvent->website</a><br><br>";
+            if($booking->checkBooking($userID, $eventID)){
+                echo 
+                "<form method='post' action='booking.php'>
+                    <input type='hidden' name='action' value='unregister'>
+                    <input type='hidden' name='user' value='$userID'>
+                    <input type='hidden' name='event' value='$eventID'>
+                    <input type='submit' value='Meld av!' />
+                </form>";
+            }
+            else echo
+                "<form method='post' action='booking.php'>
+                    <input type='hidden' name='action' value='register'>
+                    <input type='hidden' name='user' value='$userID'>
+                    <input type='hidden' name='event' value='$eventID'>
+                    <input type='submit' value='Meld på!' />
+                </form>";
+        echo
+        "</div>
     </div>
     <div class='event-page-content-bottom'>
     
     
     </div>
 </div>";
+
 ?>

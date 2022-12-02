@@ -47,5 +47,7 @@ function createUser($firstname, $lastname, $email, $phone, $password)
             header("Location: minside.php");
             exit();
         }
+
+        $conn->close();
     }
 }

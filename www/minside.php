@@ -18,6 +18,5 @@ require __DIR__."/assets/inc/authenticate.php";
 
     $display = new Display();
     $display->displayCards($results);
-
 ?>
 </div>

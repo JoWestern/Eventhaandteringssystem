@@ -1,5 +1,5 @@
 <?php
-require __DIR__."/class.DbConn.php";
+require_once __DIR__."/class.DbConn.php";
 
 class Event{
     function getEvents($number){
@@ -23,6 +23,7 @@ class Event{
         $result = $conn->query($sql);
 
         return $result;
+        $conn->close();
     }
 
     function singleEvent($event_id){
@@ -38,6 +39,7 @@ class Event{
         $result = $conn->query($sql);
 
         return $result;
+        $conn->close();
     }
 
     function createEvent($title, $info, $host, $location, $time, $category_id)
