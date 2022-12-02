@@ -25,24 +25,27 @@ function createUser($firstname, $lastname, $email, $phone, $password)
     function validateUser($username, $password) {
         $dbConn = new DbConn();
         $conn = $dbConn->connect();
-
+        echo $username;
         $sql =
-            "SELECT user_id, email, password FROM users 
-            WHERE email = $username AND password = $password;";
+            "SELECT user_id, email, password FROM eventhandling.users 
+            WHERE email = ?";
 
-        $result = $conn->query($sql); 
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
         $user = $result->fetch_assoc();
 
-        if (!empty($user)) {
+        if(!$user || !password_verify($password, $user["password"])){
+            echo "<br>Brukernavn eller passord er feil";
+            die();
+        } else {
             session_start();
-            // $_SESSION["USER_ID"] = $user->user_id;
-            // $_SESSION["USERNAME"] = $user->email;
-            // $_SESSION["LOGGED_IN"] = true;
-            redirect("minside.php");
-        }else {
-            unset($_SESSION["USER"], $_SESSION["LOGGED_IN"]);
-            echo "<strong><span style='color:red'>Feil brukernavn eller passord</span></strong>";
-            redirect("register.php");
+            $_SESSION["USER_ID"] = $user["user_id"];
+            $_SESSION["USERNAME"] = $user["email"];
+            $_SESSION["LOGGED_IN"] = true;
+            header("Location: minside.php");
+            exit();
         }
     }
 }
