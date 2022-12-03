@@ -83,28 +83,41 @@ require __DIR__."/assets/inc/authenticate.php";
     </body>
 </html>
 <?php
-// if (isset($_POST["show"])){
-//     $img = "assets/img/stock.png";
-//     echo "<img class='' src=\"" . $img . "\" alt=\"Arrangementsbilde\" width='600rem'>";
-// }
 
 if (isset($_POST["submit"])) {
     // legge inn check for hvert felt
     $title = $_POST['title'];
+    // $title = filter_var($_POST['title'], FILTER_CALLBACK, array('options' => 'my_filter'));
+
     $info = $_POST['bio'];
+    // $info = filter_var($_POST['bio'], FILTER_CALLBACK, array('options' => 'my_filter'));
+
     $location = $_POST['local'];
+    // $location = filter_var($_POST['local'], FILTER_CALLBACK, array('options' => 'my_filter'));
+
     $host = $_SESSION['USER_ID'];
+    
     $starttime = $_POST['startdate'];
     $endtime = $_POST['enddate'];
     $cat = $_POST['category'];
     $ticketprice = $_POST['ticketprice'];
+
     $website = $_POST['website'];
+    // $website = filter_var($_POST['website'], FILTER_SANITIZE_URL);
 
     // checkFile();
 
     $events = new Event();
     $CreateEvent = $events->createEvent($title, $info, $host, $location, $starttime, $cat, $endtime, $ticketprice, $website);
     echo "<p class='mb-3 fw-normal'>Arrangementet er opprettet!</p>";
+}
+
+function stringFilter($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 
 //runs when form has been submitted
