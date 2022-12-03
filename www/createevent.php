@@ -121,19 +121,11 @@ if (isset($_POST["submit"])) {
     }
 }
 
-function stringFilter($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-
 //runs when form has been submitted
 function checkFile() {
     // Define array for messages 
     $messages = array();
-    
+
     // File upload 
     if (is_uploaded_file($_FILES['imgFile']['tmp_name'])) 
     {
