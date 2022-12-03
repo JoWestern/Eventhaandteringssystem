@@ -3,6 +3,7 @@ require dirname(__DIR__) . "/www/assets/inc/header.php";
 require dirname(__DIR__) . "/www/assets/lib/class.Event.php";
 require dirname(__DIR__) . "/www/assets/lib/class.Category.php";
 require __DIR__."/assets/inc/authenticate.php";
+require __DIR__."/assets/inc/stringFilter.php";
 ?>
 <!doctype html>
 <html>
@@ -120,15 +121,6 @@ if (isset($_POST["submit"])) {
         echo "<p class='mb-3 fw-normal'>Arrangementet er oppretter!</p>";
     }
 }
-
-function stringFilter($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-
 
 //runs when form has been submitted
 function checkFile() {
