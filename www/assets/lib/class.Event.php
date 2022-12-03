@@ -47,26 +47,20 @@ class Event{
         $conn->close();
     }
 
-    function createEvent($title, $info, $host, $location, $time, $category_id)
+    function createEvent($title, $info, $host, $location, $time, $category_id, $endtime, $ticketprice, $website)
     {
         $dbConn = new DbConn();
         $conn = $dbConn->connect();
-        // $sql = "INSERT INTO events 
-        // (event_id, title, info, host, location, time, category_id) 
-        // VALUES 
-        // (?,?,?,?,?,?,?)";
 
         $stmt = $conn->prepare(
             "INSERT INTO eventhandling.events 
-            (title, info, host, location, time, category_id) 
+            (title, info, host, location, time, category_id, endtime, ticketprice, website) 
             VALUES 
-            (?,?,?,?,?,?)"
+            (?,?,?,?,?,?,?,?,?)"
         );
 
-        $stmt->bind_param('ssssss', $title, $info, $host, $location, $time, $category_id);
+        $stmt->bind_param('sssssssss', $title, $info, $host, $location, $time, $category_id, $endtime, $ticketprice, $website);
         $stmt->execute();
-
-        echo "Data inserted";
 
         $stmt->close();
         $conn->close();
@@ -99,6 +93,10 @@ class Event{
 
         return $result;
         $conn->close();
+    }
+
+    function getEventId() {
+        
     }
 }
 ?>
