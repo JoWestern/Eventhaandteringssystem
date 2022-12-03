@@ -2,7 +2,7 @@
 require dirname(__DIR__) . "/www/assets/inc/header.php";
 require dirname(__DIR__) . "/www/assets/lib/class.User.php";
 ?>
-<body class="text-center">
+<body class="text-center main">
         <div class="container login mt-5" style="width: fit-content">
             <form method="POST" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> autocomplete="off">
                 <h1 class="h3 mb-3 fw-normal">Registrer bruker</h1>

@@ -32,7 +32,7 @@
                 echo "</div>";
                 }
                 else {
-                echo "<div class='no-results'><text>Ingen treff</text><div>";
+                echo "<div class='no-results'><text>Ingen treff</text></div>";
             }
         }
 
