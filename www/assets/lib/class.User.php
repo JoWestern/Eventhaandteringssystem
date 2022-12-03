@@ -16,7 +16,13 @@ function createUser($firstname, $lastname, $email, $phone, $password)
         );
 
         $stmt->bind_param('sssis', $firstname, $lastname, $email, $phone, $password);
+        
+        try{
         $stmt->execute();
+        }
+        catch (Exception $e){
+            echo "Det er allerede registrert en bruker med oppgitt telefonnummer eller e-post";
+        }
 
         $stmt->close();
         $conn->close();
@@ -27,7 +33,7 @@ function createUser($firstname, $lastname, $email, $phone, $password)
         $conn = $dbConn->connect();
         echo $username;
         $sql =
-            "SELECT user_id, email, password FROM eventhandling.users 
+            "SELECT user_id, first_name, email, password FROM eventhandling.users 
             WHERE email = ?";
 
         $stmt = $conn->prepare($sql);
@@ -43,6 +49,7 @@ function createUser($firstname, $lastname, $email, $phone, $password)
             session_start();
             $_SESSION["USER_ID"] = $user["user_id"];
             $_SESSION["USERNAME"] = $user["email"];
+            $_SESSION["FIRSTNAME"]= $user["first_name"];
             $_SESSION["LOGGED_IN"] = true;
             header("Location: mineArrangementer.php");
             exit();

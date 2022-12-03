@@ -20,11 +20,12 @@ session_start()
       <li class="nav-item active">
         <a class="nav-link" href="/eventhaandteringssystem/www/createevent.php">Opprett arrangement</a>
       </li>
-      
       <li class="nav-item active">
         <a class="nav-link" href="/eventhaandteringssystem/www/mineArrangementer.php">Mine arrangementer</a>
       </li>
-
+      <li class="nav-item active">
+        <a class="nav-link" href="/eventhaandteringssystem/www/minprofil.php">Min profil</a>
+      </li>
       <?php
       if(isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN'] == true){
       echo '<li class="nav-item active">
