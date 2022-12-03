@@ -25,7 +25,7 @@ function createUser($firstname, $lastname, $email, $phone, $password)
     function validateUser($username, $password) {
         $dbConn = new DbConn();
         $conn = $dbConn->connect();
-        echo $username;
+        
         $sql =
             "SELECT user_id, email, password FROM eventhandling.users 
             WHERE email = ?";

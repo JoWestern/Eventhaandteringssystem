@@ -37,18 +37,26 @@ require __DIR__."/assets/lib/class.User.php";
 
     if (isset($_POST["login"])) {
         //sjekker om navnefeltet er tomt.
+
         if (empty($_POST["username"])) {
             $arrayErr["nameErr"] = "Username is required";
             // sjekker om input er med riktige tegn.
         } else {
             // input er riktig og blir lagt inn i array
-            $arrayInput["username"] = $_POST["username"];
-            $username = $_POST['username'];
+            $email = $_POST["username"];
+            $emailSanitized = filter_var($email, FILTER_SANITIZE_EMAIL);
+            if (!filter_var($emailSanitized, FILTER_VALIDATE_EMAIL)) {
+                $arrayErr["emailErr"] = "Invalid email";
+            } else {
+                $arrayInput["username"] = $emailSanitized;
+                $username = $emailSanitized;
+            }
         }
         // de tre neste kodeblokkene opperer på samme måte som den over.
         if (empty($_POST["password"])) {
             $arrayErr["enameErr"] = "Password is required";
         } else {
+            //passord blir hashet så trenger ikke desinfisering
             $arrayInput["password"] = $_POST["password"];
             $inputPassword = $_POST['password'];
             $password = $_POST["password"];
@@ -61,6 +69,7 @@ require __DIR__."/assets/lib/class.User.php";
         } else {
             $users = new User();
             $validateUser = $users->validateUser($username, $password);
+            echo "valid";
         }
     }
 
