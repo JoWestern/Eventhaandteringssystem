@@ -83,6 +83,12 @@ require __DIR__."/assets/inc/authenticate.php";
     </body>
 </html>
 <?php
+// if (isset($_POST["show"])){
+//     $img = "assets/img/stock.png";
+//     echo "<img class='' src=\"" . $img . "\" alt=\"Arrangementsbilde\" width='600rem'>";
+// }
+
+
 $arrayErr = array();
 if (isset($_POST["submit"])) {
 
