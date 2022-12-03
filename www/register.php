@@ -1,6 +1,7 @@
 <?php
 require dirname(__DIR__) . "/www/assets/inc/header.php";
 require dirname(__DIR__) . "/www/assets/lib/class.User.php";
+require __DIR__."/assets/inc/stringFilter.php";
 ?>
 <body class="main text-center">
         <div class="container login mt-5" style="width: fit-content">
@@ -38,25 +39,65 @@ require dirname(__DIR__) . "/www/assets/lib/class.User.php";
 </body>
 <?php
 if (isset($_POST["submit"])) {
-    if($_POST['password'] !== $_POST['passwordconfirm']){
-        echo "Passordene må være like";
-    }
-    else{
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $phone = $_POST['phone'];
-
-    $users = new User();
-    if (
-        $CreateUser = $users->createUser($firstname, $lastname, $email, $phone, $password)
-        ) {
-            echo "User registered!";
+        if (empty($_POST["firstname"])) {
+            $arrayErr["fnameErr"] = "Firstname is required";
+            // sjekker om input er med riktige tegn.
+        } else {
+            $firstname = stringFilter($_POST['firstname']);
         }
-    $users->validateUser($email, $_POST['password']);
+        
+        if (empty($_POST["lastname"])) {
+            $arrayErr["lnameErr"] = "Lastname is required";
+            // sjekker om input er med riktige tegn.
+        } else {
+            $lastname = stringFilter($_POST['lastname']);
+        }
+
+        if (empty($_POST["email"])) {
+            $arrayErr["emailErr"] = "Email is required";
+            // sjekker om input er med riktige tegn.
+        } else {
+            $inputEmail = $_POST["email"];
+            $emailSanitized = filter_var($inputEmail, FILTER_SANITIZE_EMAIL);
+            if (!filter_var($emailSanitized, FILTER_VALIDATE_EMAIL)) {
+                $arrayErr["emailErr"] = "Email is invalid";
+            } else {
+                $email = $emailSanitized;
+            }
+        }
+
+        if (empty($_POST["password"]) || empty($_POST["passwordconfirm"])) {
+            $arrayErr["passErr"] = "Password is required";
+            // sjekker om input er med riktige tegn.
+        } else if ($_POST['password'] !== $_POST['passwordconfirm']){
+            $arrayErr["nameErr"] = "Passordene må være like";
+        }
+        else {
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        }
+
+        if (empty($_POST["phone"])) {
+            $arrayErr["phoneErr"] = "Phonenumber is required";
+            // sjekker om input er med riktige tegn.
+        } else {
+            $phone = $_POST['phone'];
+        }
+
+        if (!(empty($arrayErr))) {
+            foreach ($arrayErr as  $value) {
+                echo "$value <br>";
+            }
+        } else {
+            $users = new User();
+            if (
+                $CreateUser = $users->createUser($firstname, $lastname, $email, $phone, $password)
+                ) {
+                    echo "User registered!";
+                }
+            $users->validateUser($email, $_POST['password']);
+        }
     }
-}
+
 
 if (isset($_POST["login"])) {
     header('Location: login.php');

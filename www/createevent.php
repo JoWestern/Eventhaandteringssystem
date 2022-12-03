@@ -3,6 +3,7 @@ require dirname(__DIR__) . "/www/assets/inc/header.php";
 require dirname(__DIR__) . "/www/assets/lib/class.Event.php";
 require dirname(__DIR__) . "/www/assets/lib/class.Category.php";
 require __DIR__."/assets/inc/authenticate.php";
+require __DIR__."/assets/inc/stringFilter.php";
 ?>
 <!doctype html>
 <html>
@@ -66,7 +67,7 @@ require __DIR__."/assets/inc/authenticate.php";
                     </div>
                     <label for="website">Link til nettside:</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="website" name="website" autocomplete="off" placeholder="www.nettside.no">
+                        <input class="form-control form-control-sm" type="text" id="website" name="website" autocomplete="off" placeholder="https://www.nettside.no">
                     </div>
                     <div class="form-group mb-3">
                         <div class="form-floating" style="margin:5px;">
@@ -87,13 +88,26 @@ $arrayErr = array();
 if (isset($_POST["submit"])) {
 
     // legge inn check for hvert felt
-    $title = stringFilter($_POST['title']);
+    if (empty($_POST["title"])) {
+        $arrayErr["titleErr"] = "Title is required";
+        // sjekker om input er med riktige tegn.
+    } else {
+        $title = stringFilter($_POST['title']);
+    }
     // $title = filter_var($_POST['title'], FILTER_CALLBACK, array('options' => 'my_filter'));
-
-    $info = stringFilter($_POST['bio']);
+    if (empty($_POST["bio"])) {
+        $arrayErr["bioErr"] = "Bio is required";
+        // sjekker om input er med riktige tegn.
+    } else {
+        $info = stringFilter($_POST['bio']);
+    }
     // $info = filter_var($_POST['bio'], FILTER_CALLBACK, array('options' => 'my_filter'));
-
-    $location = stringFilter($_POST['local']);
+    if (empty($_POST["local"])) {
+        $arrayErr["fnameErr"] = "Local is required";
+        // sjekker om input er med riktige tegn.
+    } else {
+        $location = stringFilter($_POST['local']);
+    }
     // $location = filter_var($_POST['local'], FILTER_CALLBACK, array('options' => 'my_filter'));
 
     $host = $_SESSION['USER_ID'];
@@ -104,10 +118,12 @@ if (isset($_POST["submit"])) {
     $ticketprice = $_POST['ticketprice'];
 
     // $website = $_POST['website'];
-    $website = filter_var($_POST['website'], FILTER_SANITIZE_URL);
-    if (!filter_var($website, FILTER_VALIDATE_URL)) {
+    $inputWebsite = filter_var($_POST['website'], FILTER_SANITIZE_URL);
+    if (!filter_var($inputWebsite, FILTER_VALIDATE_URL)) {
         $arrayErr["urlErr"] = "Invalid URL";
-    } 
+    } else {
+        $website = $inputWebsite;
+    }
 
     // checkFile();
     if (!(empty($arrayErr))) {
@@ -120,15 +136,6 @@ if (isset($_POST["submit"])) {
         echo "<p class='mb-3 fw-normal'>Arrangementet er oppretter!</p>";
     }
 }
-
-function stringFilter($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-
 
 //runs when form has been submitted
 function checkFile() {
