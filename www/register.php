@@ -16,7 +16,7 @@ require dirname(__DIR__) . "/www/assets/lib/class.User.php";
                 </div>
                 <label for="email">E-post:</label>
                 <div class="form-floating">
-                    <input type="text" id="email" name="email" autocomplete="off">
+                    <input type="email" id="email" name="email" autocomplete="off">
                 </div>
                 <label for="password">Passord:</label>
                 <div class="form-floating">

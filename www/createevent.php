@@ -104,7 +104,7 @@ if (isset($_POST["submit"])) {
 
     $events = new Event();
     $CreateEvent = $events->createEvent($title, $info, $host, $location, $starttime, $cat, $endtime, $ticketprice, $website);
-    echo "<p class='mb-3 fw-normal'>Arrangementet er oppretter!</p>";
+    echo "<p class='mb-3 fw-normal'>Arrangementet er opprettet!</p>";
 }
 
 //runs when form has been submitted
