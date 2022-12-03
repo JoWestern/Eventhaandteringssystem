@@ -22,6 +22,10 @@ require dirname(__DIR__) . "/www/assets/lib/class.User.php";
                 <div class="form-floating">
                     <input type="password" id="password" name="password" autocomplete="off">
                 </div>
+                <label for="password">Bekreft passord:</label>
+                <div class="form-floating">
+                    <input type="password" id="password" name="passwordconfirm" autocomplete="off">
+                </div>
                 <label for="phone">Telefonnummer:</label>
                 <div class="form-floating">
                     <input type="number" id="phone" name="phone" autocomplete="off">
@@ -34,6 +38,10 @@ require dirname(__DIR__) . "/www/assets/lib/class.User.php";
 </body>
 <?php
 if (isset($_POST["submit"])) {
+    if($_POST['password'] !== $_POST['passwordconfirm']){
+        echo "Passordene må være like";
+    }
+    else{
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $email = $_POST['email'];
@@ -46,6 +54,8 @@ if (isset($_POST["submit"])) {
         ) {
             echo "User registered!";
         }
+    $users->validateUser($email, $_POST['password']);
+    }
 }
 
 if (isset($_POST["login"])) {

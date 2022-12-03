@@ -51,7 +51,7 @@ function createUser($firstname, $lastname, $email, $phone, $password)
             $_SESSION["USERNAME"] = $user["email"];
             $_SESSION["FIRSTNAME"]= $user["first_name"];
             $_SESSION["LOGGED_IN"] = true;
-            header("Location: mineArrangementer.php");
+            header("Location: index.php");
             exit();
         }
 
