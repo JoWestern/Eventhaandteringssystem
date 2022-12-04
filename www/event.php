@@ -46,13 +46,17 @@ echo
             <strong>Kategori:<br></strong> $thisEvent->name<br><br>
             <strong>Sluttid:<br></strong> $formattedEnd<br><br>
             <strong>Pris:<br></strong> $thisEvent->ticketprice<br><br>
-            <strong>Nettside:<br></strong> <a href='$thisEvent->website'>$thisEvent->website</a><br><br>";
+            <strong>Nettside:<br></strong> <a href='$thisEvent->website' target='_blank'>$thisEvent->website</a><br><br>";
             
             if($thisEvent->host == $_SESSION['USER_ID']){
                 echo 
                 "<form method='post' action='editevent.php'>
                 <input type='hidden' name='eventID' value='$eventID'>
-                    <input type='submit' value='Rediger!' />
+                    <input type='submit' value='Rediger' />
+                </form>
+                <form method='post'>
+                <input type='hidden' name='eventID' value='$eventID'>
+                    <input type='submit' name='delete' value='Slett' />
                 </form>";
             }
             elseif($booking->checkBooking($userID, $eventID)){
@@ -71,6 +75,11 @@ echo
                     <input type='hidden' name='event' value='$eventID'>
                     <input type='submit' value='Meld på!' />
                 </form>";
+            
+            if (isset($_POST["delete"])) {
+                echo "Arrangementet ble slettet";
+            }
+        
         echo
         "</div>
     </div>
