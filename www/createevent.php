@@ -71,10 +71,9 @@ require __DIR__."/assets/inc/stringFilter.php";
                     </div>
                     <div class="form-group mb-3">
                         <div class="form-floating" style="margin:5px;">
-                            <label for="imgFile">Legg til bilde:</label>
+                            <label for="imgFile">Legg til bilde: (kun .jpg og .png)</label>
                             <div>
                                 <input name="imgFile" type="file">
-                                <input name="show" type="submit" value="Lagre bilde">
                             </div>
                         </div>
                     <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="submit" value="Opprett" autocomplete="off"></input>
@@ -120,7 +119,7 @@ if (isset($_POST["submit"])) {
     // $location = filter_var($_POST['local'], FILTER_CALLBACK, array('options' => 'my_filter'));
 
     $host = $_SESSION['USER_ID'];
-    
+
     $starttime = $_POST['startdate'];
     $endtime = $_POST['enddate'];
     $cat = $_POST['category'];
@@ -145,6 +144,9 @@ if (isset($_POST["submit"])) {
         }
     }
 
+    if (isset($_FILES['imgFile'])) {
+        $img_url = checkFile();
+    }
     // checkFile();
     if (!(empty($arrayErr))) {
         foreach ($arrayErr as  $value) {
@@ -152,8 +154,8 @@ if (isset($_POST["submit"])) {
         }
     } else {
         $events = new Event();
-        $CreateEvent = $events->createEvent($title, $info, $host, $location, $starttime, $cat, $endtime, $ticketprice, $website);
-        echo "<p class='mb-3 fw-normal'>Arrangementet er oppretter!</p>";
+        $CreateEvent = $events->createEvent($title, $info, $host, $location, $starttime, $cat, $endtime, $ticketprice, $website, $img_url);
+        echo "<p class='mb-3 fw-normal'>Arrangementet er opprettet!</p>";
     }
 }
 
@@ -161,7 +163,8 @@ if (isset($_POST["submit"])) {
 function checkFile() {
     // Define array for messages 
     $messages = array();
-    
+    $semiPath = "/Eventhaandteringssystem/www/assets/img/";
+    $filepathStock = $semiPath . "stock.png";
     // File upload 
     if (is_uploaded_file($_FILES['imgFile']['tmp_name'])) 
     {
@@ -203,14 +206,6 @@ function checkFile() {
         // If success
         if (empty($messages)) 
         {
-            /*if user has picture but of different type, 
-            the old gets deleted instead of there being two*/
-            foreach($acc_file_types as $value){
-                $file = "gunnar" . '.' . array_search($value, $acc_file_types);
-                if (file_exists($dir . $file)) {
-                    unlink($dir . $file);
-                }
-            }
 
             // Moving uploaded file
             $filepath = $dir . $filename;
@@ -218,19 +213,17 @@ function checkFile() {
            
             if ($uploaded_file){
                 $messages['success'][] = "Filen ble lastet opp!";
-                $img = "assets/img/" . $filename;
-                return $img;
+                $imgPath = $semiPath . $filename;
+                return $imgPath;
             } else {
                 $messages['error'][] = "Not uploaded because of error #".$_FILES["imgFile"]["error"];
-                $img = "assets/img/stock.png";
-                return $img;
+                return $filepathStock;
             }
         }
-
-    } else {
+    } 
+    else {
         $messages['error'][] = "Ingen fil er lastet opp";
-        $img = "/stock.png";
-        return $img;
+        return $filepathStock;
     }
 }
 

@@ -47,19 +47,19 @@ class Event{
         $conn->close();
     }
 
-    function createEvent($title, $info, $host, $location, $time, $category_id, $endtime, $ticketprice, $website)
+    function createEvent($title, $info, $host, $location, $time, $category_id, $endtime, $ticketprice, $website, $img_url)
     {
         $dbConn = new DbConn();
         $conn = $dbConn->connect();
 
         $stmt = $conn->prepare(
             "INSERT INTO eventhandling.events 
-            (title, info, host, location, time, category_id, endtime, ticketprice, website) 
+            (title, info, host, location, time, category_id, endtime, ticketprice, website, img_path) 
             VALUES 
-            (?,?,?,?,?,?,?,?,?)"
+            (?,?,?,?,?,?,?,?,?,?)"
         );
 
-        $stmt->bind_param('sssssssss', $title, $info, $host, $location, $time, $category_id, $endtime, $ticketprice, $website);
+        $stmt->bind_param('ssssssssss', $title, $info, $host, $location, $time, $category_id, $endtime, $ticketprice, $website, $img_url);
         $stmt->execute();
 
         $stmt->close();
