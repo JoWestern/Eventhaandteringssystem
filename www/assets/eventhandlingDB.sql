@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 04. Des, 2022 16:08 PM
+-- Generation Time: 04. Des, 2022 16:18 PM
 -- Tjener-versjon: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -88,27 +88,28 @@ CREATE TABLE `events` (
   `category_id` int(10) NOT NULL,
   `endtime` datetime DEFAULT NULL,
   `ticketprice` varchar(10) DEFAULT NULL,
-  `website` varchar(200) DEFAULT NULL
+  `website` varchar(200) DEFAULT NULL,
+  `img_path` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dataark for tabell `events`
 --
 
-INSERT INTO `events` (`event_id`, `title`, `info`, `host`, `location`, `time`, `category_id`, `endtime`, `ticketprice`, `website`) VALUES
-(1, 'Skogsmarathon', 'Kom og løp 42 km i skauen.', 1, 'Bymarka, start og mål i Ravnedalen', '2023-04-01 12:00:00', 1, NULL, NULL, NULL),
-(2, 'Filmfestival', 'Filmfestival hos SørKino, gratis inngang for alle hele dagen!', 2, 'Sør Kino, Kristiansand', '2023-01-07 14:00:00', 2, '2023-01-08 23:00:00', '0', 'https://www.nfkino.no/kino/kristiansand'),
-(3, 'Gokart', 'Gokart', 1, 'X3M Sørlandsparken', '2023-01-21 18:30:00', 5, NULL, '1000', 'https://x3m.no'),
-(4, 'Gratiskonsert', 'Gratis konsert med flotte musikere', 1, 'Tresse, Kristiansand', '2023-02-06 20:00:00', 4, NULL, NULL, NULL),
-(5, 'Flåklypa Grand Prix teaterforestilling', 'Teaterforestilling av klassikeren Flåklypa Grand Prix, kom og se!', 2, 'Kilden, Kristiansand', '2023-02-06 19:00:00', 3, NULL, NULL, NULL),
-(6, 'Ballett', 'Kom og se ballettdansere danse ballett. Disse folkene er bedre enn deg på balanse, rytme, kroppsbeherskelse, utholdenhet, osv osv.\r\n\r\nSvanesjøen blir fremført.', 2, 'Kilden', '2023-04-01 19:00:00', 9, '2023-04-01 21:00:00', '350', NULL),
-(7, 'Gitarkurs', 'Kom og lær å spille gitar. Du vil adri bli Jimi Hendrix, men du kan alltids prøve og derpå få drømmene dine knust.', 1, 'Kvadraturen Videregående Skole', '2023-02-09 15:00:00', 4, NULL, '500', NULL),
-(8, 'Romjulsgløggfest', 'Her skal det drekkas gløgg guttær og jæntær! Ta med ditt feteste krus og ubegrensede mengder pepperkaker.', 2, 'Wergelandsparken/Torvet', '2022-12-23 19:00:00', 6, NULL, '0', NULL),
-(9, 'Gratis dekkskift', 'Kom og få gratis dekkskift. Hvis du er gammel eller av andre grunner ikke klarer å bytte fra vinter- til sommerhjul selv, så gjør vi jobben for deg.', 1, 'Dekkmann Sørlandsparken', '2023-04-01 10:00:00', 7, '2023-04-01 16:00:00', '0', NULL),
-(10, 'TestEvent1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2, 'Lorem Ipsum', '2022-12-21 15:00:00', 8, NULL, '200', 'https://no.wikipedia.org/wiki/Lorem_ipsum'),
-(11, 'TestEvent2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, 'TestLocation', '2022-12-31 12:00:00', 4, NULL, '1000', NULL),
-(12, 'TestEvent3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2, 'TestLocation', '2022-12-01 15:00:00', 1, '2022-12-01 16:00:00', '500', 'https://no.wikipedia.org/wiki/Lorem_ipsum'),
-(13, 'Skirenn', 'Vi skal ut og gå på ski, førstemann til mål får premie (twistpose)', 3, 'Baneheia', '2022-12-04 12:00:00', 1, '2022-12-04 14:00:00', '100', '');
+INSERT INTO `events` (`event_id`, `title`, `info`, `host`, `location`, `time`, `category_id`, `endtime`, `ticketprice`, `website`, `img_path`) VALUES
+(1, 'Skogsmarathon', 'Kom og løp 42 km i skauen.', 1, 'Bymarka, start og mål i Ravnedalen', '2023-04-01 12:00:00', 1, NULL, NULL, NULL, NULL),
+(2, 'Filmfestival', 'Filmfestival hos SørKino, gratis inngang for alle hele dagen!', 2, 'Sør Kino, Kristiansand', '2023-01-07 14:00:00', 2, '2023-01-08 23:00:00', '0', 'https://www.nfkino.no/kino/kristiansand', NULL),
+(3, 'Gokart', 'Gokart', 1, 'X3M Sørlandsparken', '2023-01-21 18:30:00', 5, NULL, '1000', 'https://x3m.no', NULL),
+(4, 'Gratiskonsert', 'Gratis konsert med flotte musikere', 1, 'Tresse, Kristiansand', '2023-02-06 20:00:00', 4, NULL, NULL, NULL, NULL),
+(5, 'Flåklypa Grand Prix teaterforestilling', 'Teaterforestilling av klassikeren Flåklypa Grand Prix, kom og se!', 2, 'Kilden, Kristiansand', '2023-02-06 19:00:00', 3, NULL, NULL, NULL, NULL),
+(6, 'Ballett', 'Kom og se ballettdansere danse ballett. Disse folkene er bedre enn deg på balanse, rytme, kroppsbeherskelse, utholdenhet, osv osv.\r\n\r\nSvanesjøen blir fremført.', 2, 'Kilden', '2023-04-01 19:00:00', 9, '2023-04-01 21:00:00', '350', NULL, NULL),
+(7, 'Gitarkurs', 'Kom og lær å spille gitar. Du vil adri bli Jimi Hendrix, men du kan alltids prøve og derpå få drømmene dine knust.', 1, 'Kvadraturen Videregående Skole', '2023-02-09 15:00:00', 4, NULL, '500', NULL, NULL),
+(8, 'Romjulsgløggfest', 'Her skal det drekkas gløgg guttær og jæntær! Ta med ditt feteste krus og ubegrensede mengder pepperkaker.', 2, 'Wergelandsparken/Torvet', '2022-12-23 19:00:00', 6, NULL, '0', NULL, NULL),
+(9, 'Gratis dekkskift', 'Kom og få gratis dekkskift. Hvis du er gammel eller av andre grunner ikke klarer å bytte fra vinter- til sommerhjul selv, så gjør vi jobben for deg.', 1, 'Dekkmann Sørlandsparken', '2023-04-01 10:00:00', 7, '2023-04-01 16:00:00', '0', NULL, NULL),
+(10, 'TestEvent1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2, 'Lorem Ipsum', '2022-12-21 15:00:00', 8, NULL, '200', 'https://no.wikipedia.org/wiki/Lorem_ipsum', NULL),
+(11, 'TestEvent2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, 'TestLocation', '2022-12-31 12:00:00', 4, NULL, '1000', NULL, NULL),
+(12, 'TestEvent3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2, 'TestLocation', '2022-12-01 15:00:00', 1, '2022-12-01 16:00:00', '500', 'https://no.wikipedia.org/wiki/Lorem_ipsum', NULL),
+(13, 'Skirenn', 'Vi skal ut og gå på ski, førstemann til mål får premie (twistpose)', 3, 'Baneheia', '2022-12-04 12:00:00', 1, '2022-12-04 14:00:00', '100', '', NULL);
 
 -- --------------------------------------------------------
 
