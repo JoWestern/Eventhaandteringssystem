@@ -47,7 +47,15 @@ echo
             <strong>Sluttid:<br></strong> $formattedEnd<br><br>
             <strong>Pris:<br></strong> $thisEvent->ticketprice<br><br>
             <strong>Nettside:<br></strong> <a href='$thisEvent->website'>$thisEvent->website</a><br><br>";
-            if($booking->checkBooking($userID, $eventID)){
+            
+            if($thisEvent->host == $_SESSION['USER_ID']){
+                echo 
+                "<form method='post' action='editevent.php'>
+                <input type='hidden' name='eventID' value='$eventID'>
+                    <input type='submit' value='Rediger!' />
+                </form>";
+            }
+            elseif($booking->checkBooking($userID, $eventID)){
                 echo 
                 "<form method='post' action='booking.php'>
                     <input type='hidden' name='action' value='unregister'>
