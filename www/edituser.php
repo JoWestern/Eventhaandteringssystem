@@ -2,6 +2,7 @@
 require __DIR__."/assets/inc/header.php";
 require __DIR__."/assets/lib/class.User.php";
 require __DIR__."/assets/inc/authenticate.php";
+require __DIR__."/assets/inc/stringFilter.php";
 ?>
 
 <div class="main">
@@ -46,11 +47,50 @@ echo '
         </div>
     </div>
 </body>';
-
+$arrayErr = array();
 if (isset($_POST["edit"])) {
-    
 
-    $user->editUserInfo($_SESSION['USER_ID'], $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['phone']);
-    $_SESSION['FIRSTNAME'] = $_POST['firstname'];
-    header('Location: minprofil.php');
+    if (empty($_POST["firstname"])) {
+        $arrayErr["fnameErr"] = "Firstname is required";
+        // sjekker om input er med riktige tegn.
+    } else {
+        $editedFirstname = stringFilter($_POST['firstname']);
+    }
+    
+    if (empty($_POST["lastname"])) {
+        $arrayErr["lnameErr"] = "Lastname is required";
+        // sjekker om input er med riktige tegn.
+    } else {
+        $editedLastname = stringFilter($_POST['lastname']);
+    }
+
+    if (empty($_POST["email"])) {
+        $arrayErr["emailErr"] = "Email is required";
+        // sjekker om input er med riktige tegn.
+    } else {
+        $inputEmail = $_POST["email"];
+        $emailSanitized = filter_var($inputEmail, FILTER_SANITIZE_EMAIL);
+        if (!filter_var($emailSanitized, FILTER_VALIDATE_EMAIL)) {
+            $arrayErr["emailErr"] = "Email is invalid";
+        } else {
+            $editedEmail = $emailSanitized;
+        }
+    }
+
+    if (empty($_POST["phone"])) {
+        $arrayErr["phoneErr"] = "Phonenumber is required";
+        // sjekker om input er med riktige tegn.
+    } else {
+        $editedPhone = $_POST['phone'];
+    }
+
+    if (!(empty($arrayErr))) {
+        foreach ($arrayErr as  $value) {
+            echo "$value <br>";
+        }
+    } else {
+        $user->editUserInfo($_SESSION['USER_ID'], $editedFirstname, $editedLastname, $editedEmail, $editedPhone);
+        $_SESSION['FIRSTNAME'] = $editedFirstname;
+        header('Location: minprofil.php');
+    }
 }
