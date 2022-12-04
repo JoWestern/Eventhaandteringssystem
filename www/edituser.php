@@ -53,14 +53,20 @@ if (isset($_POST["edit"])) {
     if (empty($_POST["firstname"])) {
         $arrayErr["fnameErr"] = "Firstname is required";
         // sjekker om input er med riktige tegn.
-    } else {
+    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+        $arrayErr = "Only letters and white space allowed";
+    }
+    else {
         $editedFirstname = stringFilter($_POST['firstname']);
     }
     
     if (empty($_POST["lastname"])) {
-        $arrayErr["lnameErr"] = "Lastname is required";
+        $editedLastname = "";
         // sjekker om input er med riktige tegn.
-    } else {
+    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+        $arrayErr = "Only letters and white space allowed";
+    }
+    else {
         $editedLastname = stringFilter($_POST['lastname']);
     }
 
@@ -80,7 +86,10 @@ if (isset($_POST["edit"])) {
     if (empty($_POST["phone"])) {
         $arrayErr["phoneErr"] = "Phonenumber is required";
         // sjekker om input er med riktige tegn.
-    } else {
+    } else if (!is_numeric($_POST["phone"])) {
+        $arrayErr["phoneErr"] = "Phonenumber must be a number";
+    }  
+    else {
         $editedPhone = $_POST['phone'];
     }
 

@@ -1,7 +1,6 @@
 <?php 
 include "./assets/inc/header.php";
 require __DIR__."/assets/lib/class.User.php";
-require __DIR__."/assets/inc/stringFilter.php";
 
 // session_start();
 // // Check if the user is already logged in, if yes then redirect him to welcome page
@@ -59,7 +58,7 @@ require __DIR__."/assets/inc/stringFilter.php";
         }
         else {
             //passord blir hashet så trenger ikke desinfisering
-            $password = stringFilter($_POST["password"]);
+            $password = $_POST["password"];
         }
         // hvis error-matrisen ikke er tom, print feil
         if (!(empty($arrayErr))) {

@@ -26,7 +26,7 @@ else {
     $formattedEnd = $dateFormat->formatDatetime($datetimeEnd);
 }
 
-if(file_exists("assets/img/event" . $thisEvent->event_id . ".jpg")) $img = "assets/img/event" . $thisEvent->event_id . ".jpg";
+if(file_exists($thisEvent->img_path)) $img = $thisEvent->img_path;
 else $img = "assets/img/stock.png";
 
 echo 

@@ -41,10 +41,7 @@ echo '
 </body>';
 $arrayErr = array();
 if (isset($_POST["edit"])) {
-    $oldPass = $_POST['oldpassword'];
-    $newPass = $_POST['newpassword'];
-    $confirmPass = $_POST['confirmpassword'];
-
+    
     if (empty($_POST['oldpassword']) || empty($_POST['newpassword']) || empty($_POST['confirmpassword'])) {
         $arrayErr['oldpassErr'] = "Password is required";
     } else if(
