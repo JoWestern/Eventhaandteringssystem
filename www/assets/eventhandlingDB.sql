@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 02. Des, 2022 17:01 PM
+-- Generation Time: 04. Des, 2022 16:08 PM
 -- Tjener-versjon: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -38,11 +38,13 @@ CREATE TABLE `bookings` (
 --
 
 INSERT INTO `bookings` (`booking_id`, `user_id`, `event_id`) VALUES
-(2, 1, 3),
+(22, 1, 3),
 (18, 1, 4),
 (19, 1, 7),
+(24, 1, 10),
 (1, 2, 2),
-(3, 2, 3);
+(3, 2, 3),
+(23, 3, 13);
 
 -- --------------------------------------------------------
 
@@ -96,7 +98,7 @@ CREATE TABLE `events` (
 INSERT INTO `events` (`event_id`, `title`, `info`, `host`, `location`, `time`, `category_id`, `endtime`, `ticketprice`, `website`) VALUES
 (1, 'Skogsmarathon', 'Kom og løp 42 km i skauen.', 1, 'Bymarka, start og mål i Ravnedalen', '2023-04-01 12:00:00', 1, NULL, NULL, NULL),
 (2, 'Filmfestival', 'Filmfestival hos SørKino, gratis inngang for alle hele dagen!', 2, 'Sør Kino, Kristiansand', '2023-01-07 14:00:00', 2, '2023-01-08 23:00:00', '0', 'https://www.nfkino.no/kino/kristiansand'),
-(3, 'Le Mans-løp', 'Karting Le Mans-stil hos X3M Sørlandsparken!', 1, 'X3M Sørlandsparken', '2023-01-21 18:30:00', 1, NULL, NULL, NULL),
+(3, 'Gokart', 'Gokart', 1, 'X3M Sørlandsparken', '2023-01-21 18:30:00', 5, NULL, '1000', 'https://x3m.no'),
 (4, 'Gratiskonsert', 'Gratis konsert med flotte musikere', 1, 'Tresse, Kristiansand', '2023-02-06 20:00:00', 4, NULL, NULL, NULL),
 (5, 'Flåklypa Grand Prix teaterforestilling', 'Teaterforestilling av klassikeren Flåklypa Grand Prix, kom og se!', 2, 'Kilden, Kristiansand', '2023-02-06 19:00:00', 3, NULL, NULL, NULL),
 (6, 'Ballett', 'Kom og se ballettdansere danse ballett. Disse folkene er bedre enn deg på balanse, rytme, kroppsbeherskelse, utholdenhet, osv osv.\r\n\r\nSvanesjøen blir fremført.', 2, 'Kilden', '2023-04-01 19:00:00', 9, '2023-04-01 21:00:00', '350', NULL),
@@ -105,7 +107,8 @@ INSERT INTO `events` (`event_id`, `title`, `info`, `host`, `location`, `time`, `
 (9, 'Gratis dekkskift', 'Kom og få gratis dekkskift. Hvis du er gammel eller av andre grunner ikke klarer å bytte fra vinter- til sommerhjul selv, så gjør vi jobben for deg.', 1, 'Dekkmann Sørlandsparken', '2023-04-01 10:00:00', 7, '2023-04-01 16:00:00', '0', NULL),
 (10, 'TestEvent1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2, 'Lorem Ipsum', '2022-12-21 15:00:00', 8, NULL, '200', 'https://no.wikipedia.org/wiki/Lorem_ipsum'),
 (11, 'TestEvent2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, 'TestLocation', '2022-12-31 12:00:00', 4, NULL, '1000', NULL),
-(12, 'TestEvent3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2, 'TestLocation', '2022-12-01 15:00:00', 1, '2022-12-01 16:00:00', '500', 'https://no.wikipedia.org/wiki/Lorem_ipsum');
+(12, 'TestEvent3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2, 'TestLocation', '2022-12-01 15:00:00', 1, '2022-12-01 16:00:00', '500', 'https://no.wikipedia.org/wiki/Lorem_ipsum'),
+(13, 'Skirenn', 'Vi skal ut og gå på ski, førstemann til mål får premie (twistpose)', 3, 'Baneheia', '2022-12-04 12:00:00', 1, '2022-12-04 14:00:00', '100', '');
 
 -- --------------------------------------------------------
 
@@ -139,7 +142,7 @@ INSERT INTO `preferences` (`preference_id`, `user_id`, `category_id`) VALUES
 CREATE TABLE `users` (
   `user_id` int(10) NOT NULL,
   `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `password` varchar(300) NOT NULL
@@ -150,8 +153,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `phone`, `password`) VALUES
-(1, 'Erlend', 'Lotsberg', 'erlend@mail.no', '81549300', '$2y$10$Z.Yy0Zc54g1v1ORbmA5oFO5Mu4MGdfHG85ertxl7dhVA.qs6PTPj2'),
-(2, 'Joachim', 'Western', 'joachim@wildwildwest.com', '22225555', '$2y$10$xeyDCV5AgA.fn1u.HrBcaO.s9WqG9v0FjR01n7Z58cOEBBY.wqj5i');
+(1, 'Erlend', 'Lotsberg', 'erlend@mail.no', '81509000', '$2y$10$sSCdVI5ZTVH.9D51dJBsru6dK7loPcfVz6BfZLqqqYFRIHk.3RZlm'),
+(2, 'Joachim', 'Western', 'joachim@wildwildwest.com', '22225555', '$2y$10$xeyDCV5AgA.fn1u.HrBcaO.s9WqG9v0FjR01n7Z58cOEBBY.wqj5i'),
+(3, 'Ole', 'Lukkøye', 'ole@lukkøye.no', '12345678', '$2y$10$IjCWvA3vGyCunO80JdlpPuskslmToo0QX2BuWGK6fXmwL6Hp9Dn0i'),
+(9, 'Mikke', 'Mus', 'mikke@disney.no', '88888888', '$2y$10$hFmzAdXlQ1KvDmiRp9h1O.vTmwoSl6m9B2hOa6gC5Gs8VeKdjhcKK'),
+(10, 'Donald', 'Duck', 'donald@disney.com', '84488448', '$2y$10$v/NWytdsGZqL6hZoiIByYemVX5sRjT5Zlj38FBN8HezUrDhrC7ySm');
 
 --
 -- Indexes for dumped tables
@@ -208,7 +214,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `booking_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `booking_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -220,7 +226,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `event_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `event_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `preferences`
@@ -232,7 +238,7 @@ ALTER TABLE `preferences`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Begrensninger for dumpede tabeller
@@ -242,22 +248,22 @@ ALTER TABLE `users`
 -- Begrensninger for tabell `bookings`
 --
 ALTER TABLE `bookings`
-  ADD CONSTRAINT `booking_event_id` FOREIGN KEY (`event_id`) REFERENCES `events` (`event_id`),
-  ADD CONSTRAINT `booking_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `booking_event_id` FOREIGN KEY (`event_id`) REFERENCES `events` (`event_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `booking_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Begrensninger for tabell `events`
 --
 ALTER TABLE `events`
-  ADD CONSTRAINT `category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`),
-  ADD CONSTRAINT `host_id` FOREIGN KEY (`host`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON DELETE NO ACTION,
+  ADD CONSTRAINT `host_id` FOREIGN KEY (`host`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Begrensninger for tabell `preferences`
 --
 ALTER TABLE `preferences`
-  ADD CONSTRAINT `preference_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`),
-  ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `preference_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
