@@ -95,8 +95,39 @@ class Event{
         $conn->close();
     }
 
-    function getEventId() {
+    function editEvent($eventID, $title, $info, $location, $time, $categoryID, $endtime, $ticketprice, $website){
+        $dbConn = new DbConn();
+        $conn = $dbConn->connect();
+
+        $stmt = $conn->prepare(
+            "UPDATE events 
+            SET
+                title = ?,
+                info = ?,
+                location = ?,
+                time = ?,
+                category_id = ?,
+                endtime = ?,
+                ticketprice = ?,
+                website = ? 
+            WHERE event_id = $eventID;"
+        );
+
+        $stmt->bind_param('ssssisss', $title, $info, $location, $time, $categoryID, $endtime, $ticketprice, $website);
         
+        try{
+            $stmt->execute();
+        }
+        catch (Exception $e){
+            echo "Noe gikk galt, endringen ble ikke lagret";
+        }
+
+        $stmt->close();
+        $conn->close();
+    }
+    
+    function deleteEvent(){
+
     }
 }
 ?>

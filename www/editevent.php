@@ -8,6 +8,7 @@ $event = new Event();
 $result = $event->singleEvent($_POST['eventID']);
 $thisEvent = $result->fetch_object();
 
+$eventID = $_POST['eventID'];
 $title = $thisEvent->title;
 $info = $thisEvent->info;
 $location = $thisEvent->location;
@@ -34,7 +35,7 @@ $website = $thisEvent->website;
             }
         ?>
         </div>
-            <form method="POST" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> autocomplete="off" enctype="multipart/form-data">
+            <form method="POST" action='' autocomplete="off" enctype="multipart/form-data">
                 <h1 class="h3 mb-3 fw-normal">Endre arrangement</h1>
                     <label for="title">Tittel:</label>
                     <div class="form-floating">
@@ -89,6 +90,7 @@ $website = $thisEvent->website;
                                 <input name="show" type="submit" value="Lagre bilde">
                             </div>
                         </div>
+                    <input type='hidden' name='eventID' value='<?php echo $_POST['eventID']?>'>
                     <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="submit" value="Endre" autocomplete="off"></input>
                 </div>
             </form>
@@ -103,21 +105,22 @@ $website = $thisEvent->website;
 
 if (isset($_POST["submit"])) {
     // legge inn check for hvert felt
-    $title = $_POST['title'];
-    $info = $_POST['bio'];
-    $location = $_POST['local'];
-    $host = $_SESSION['USER_ID'];
-    $starttime = $_POST['startdate'];
-    $endtime = $_POST['enddate'];
-    $cat = $_POST['category'];
-    $ticketprice = $_POST['ticketprice'];
-    $website = $_POST['website'];
+    // $title = $_POST['title'];
+    // $info = $_POST['bio'];
+    // $location = $_POST['local'];
+    // $starttime = $_POST['startdate'];
+    // $endtime = $_POST['enddate'];
+    // $cat = $_POST['category'];
+    // $ticketprice = $_POST['ticketprice'];
+    // $website = $_POST['website'];
 
-    // checkFile();
+    checkFile();
 
     $events = new Event();
-    $CreateEvent = $events->createEvent($title, $info, $host, $location, $starttime, $cat, $endtime, $ticketprice, $website);
-    echo "<p class='mb-3 fw-normal'>Arrangementet er opprettet!</p>";
+    $events->editEvent($_POST['eventID'], $_POST['title'], $_POST['bio'], $_POST['local'], $_POST['startdate'], $_POST['category'], $_POST['enddate'], $_POST['ticketprice'], $_POST['website']);
+    
+    // $redirect = "event.php?event_id=" . $_POST['eventID'];
+    // header('Location: event.php/event_id=3');
 }
 
 //runs when form has been submitted

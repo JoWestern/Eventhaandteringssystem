@@ -11,6 +11,11 @@
 
                     if(file_exists("assets/img/event" . $row['event_id'] . ".jpg")) $img = $img = "assets/img/event" . $row['event_id'] . ".jpg";
                     else $img = "assets/img/stock.png";
+
+                    if(strlen($row['info']) > 200){
+                        $info = substr($row["info"],0,200) . "...";
+                    }
+                    else $info = $row['info'];
                     
                     echo "
                     <div class=\"card\" style=\"width: 18rem;\">
@@ -19,7 +24,7 @@
                     </div>
                     <div class=\"card-body d-flex flex-column\">
                         <h5 class=\"card-title\">" . $row["title"] . "</h5>
-                        <p class=\"card-text\">" . substr($row["info"],0,200) . "...</p>
+                        <p class=\"card-text\">$info</p>
                     </div>
                     <div class=\"card-footer\">
                         <p class=\"card-text\"><strong>" . $row["location"] . "</strong></p>
