@@ -47,18 +47,26 @@ if (isset($_POST["edit"])) {
 
     if (empty($_POST['oldpassword']) || empty($_POST['newpassword']) || empty($_POST['confirmpassword'])) {
         $arrayErr['oldpassErr'] = "Password is required";
-    } else if(!password_verify($_POST['oldpassword'], $thisUser->password)){
-        echo "Feil passord";
-        die();
+    } else if(
+        !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['oldpassword']) ||
+        !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['newpassword']) ||
+        !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['confirmpassword'])
+        ) {
+        $arrayErr["passErr"] = 'The password does not meet the requirements!';
     }
-    elseif($_POST['newpassword'] !== $_POST['confirmpassword']){
-        echo "De nye passordene må være like";
-        die();
+    else if(!password_verify($_POST['oldpassword'], $thisUser->password)){
+        $arrayErr["passErr"] = "Feil passord";
     }
-    else{
+    else if($_POST['newpassword'] !== $_POST['confirmpassword']){
+        $arrayErr["passErr"] = "De nye passordene må være like";
+    }
+    
+    if (!(empty($arrayErr))) {
+        foreach ($arrayErr as  $value) {
+        echo "$value <br>";
+    }
+    } else {
         $user->editUserPassword($_SESSION['USER_ID'], password_hash($_POST['newpassword'], PASSWORD_DEFAULT));
         echo "Passord endret";
     }
-
-
 }

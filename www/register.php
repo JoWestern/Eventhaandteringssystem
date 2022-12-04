@@ -19,7 +19,7 @@ require __DIR__."/assets/inc/stringFilter.php";
                 <div class="form-floating">
                     <input type="email" id="email" name="email" autocomplete="off">
                 </div>
-                <label for="password">Passord:</label>
+                <label for="password">Passord (8-12 tegn, minst ett tall)</label>
                 <div class="form-floating">
                     <input type="password" id="password" name="password" autocomplete="off">
                 </div>
@@ -42,7 +42,7 @@ if (isset($_POST["submit"])) {
         if (empty($_POST["firstname"])) {
             $arrayErr["fnameErr"] = "Firstname is required";
             // sjekker om input er med riktige tegn.
-        } if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+        } else if (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['firstname'])) {
             $arrayErr = "Only letters and white space allowed";
         }
         else {
@@ -50,9 +50,12 @@ if (isset($_POST["submit"])) {
         }
 
         if (empty($_POST["lastname"])) {
-            $arrayErr["lnameErr"] = "Lastname is required";
+            $lastname = "";
             // sjekker om input er med riktige tegn.
-        } else {
+        } else if (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['lastname'])) {
+            $arrayErr = "Only letters and white space allowed";
+        }
+        else {
             $lastname = stringFilter($_POST['lastname']);
         }
 
@@ -72,7 +75,10 @@ if (isset($_POST["submit"])) {
         if (empty($_POST["password"]) || empty($_POST["passwordconfirm"])) {
             $arrayErr["passErr"] = "Password is required";
             // sjekker om input er med riktige tegn.
-        } else if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['password'])) {
+        } else if(
+            !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['password']) ||
+            !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['passwordconfirm']) 
+            ) {
             $arrayErr["passErr"] = 'The password does not meet the requirements!';
         }
         else if ($_POST['password'] !== $_POST['passwordconfirm']){
@@ -85,7 +91,10 @@ if (isset($_POST["submit"])) {
         if (empty($_POST["phone"])) {
             $arrayErr["phoneErr"] = "Phonenumber is required";
             // sjekker om input er med riktige tegn.
-        } else {
+        } else if (!is_numeric($_POST["phone"])) {
+            $arrayErr["phoneErr"] = "Phonenumber must be a number";
+        }  
+        else {
             $phone = $_POST['phone'];
         }
 

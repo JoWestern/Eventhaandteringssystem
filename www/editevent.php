@@ -3,6 +3,7 @@ require dirname(__DIR__) . "/www/assets/inc/header.php";
 require dirname(__DIR__) . "/www/assets/lib/class.Event.php";
 require dirname(__DIR__) . "/www/assets/lib/class.Category.php";
 require __DIR__."/assets/inc/authenticate.php";
+require __DIR__."/assets/inc/stringFilter.php";
 
 $event = new Event();
 $result = $event->singleEvent($_POST['eventID']);
@@ -102,23 +103,73 @@ $website = $thisEvent->website;
 //     $img = "assets/img/stock.png";
 //     echo "<img class='' src=\"" . $img . "\" alt=\"Arrangementsbilde\" width='600rem'>";
 // }
-
+$arrayErr = array();
 if (isset($_POST["submit"])) {
     // legge inn check for hvert felt
-    // $title = $_POST['title'];
-    // $info = $_POST['bio'];
-    // $location = $_POST['local'];
-    // $starttime = $_POST['startdate'];
-    // $endtime = $_POST['enddate'];
-    // $cat = $_POST['category'];
-    // $ticketprice = $_POST['ticketprice'];
-    // $website = $_POST['website'];
+    if (empty($_POST["title"])) {
+        $arrayErr["titleErr"] = "Title is required";
+        // sjekker om input er med riktige tegn.
+    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+        $arrayErr["titleErr"] = "Only letters and white space allowed";
+    }
+    else {
+        $editedTitle = stringFilter($_POST['title']);
+    }
+    // $title = filter_var($_POST['title'], FILTER_CALLBACK, array('options' => 'my_filter'));
+    if (empty($_POST["bio"])) {
+        $arrayErr["bioErr"] = "Bio is required";
+        // sjekker om input er med riktige tegn.
+    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+        $arrayErr["bioErr"] = "Only letters and white space allowed";
+    }
+    else {
+        $editedInfo = stringFilter($_POST['bio']);
+    }
+    // $info = filter_var($_POST['bio'], FILTER_CALLBACK, array('options' => 'my_filter'));
+    if (empty($_POST["local"])) {
+        $arrayErr["fnameErr"] = "Local is required";
+        // sjekker om input er med riktige tegn.
+    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+        $arrayErr["fnameErr"] = "Only letters and white space allowed";
+    }
+    else {
+        $editedLocation = stringFilter($_POST['local']);
+    }
+    // $location = filter_var($_POST['local'], FILTER_CALLBACK, array('options' => 'my_filter'));
 
-    checkFile();
-
-    $events = new Event();
-    $events->editEvent($_POST['eventID'], $_POST['title'], $_POST['bio'], $_POST['local'], $_POST['startdate'], $_POST['category'], $_POST['enddate'], $_POST['ticketprice'], $_POST['website']);
+    $host = $_SESSION['USER_ID'];
     
+    $editedStarttime = $_POST['startdate'];
+    $EditedEndtime = $_POST['enddate'];
+    $editedCat = $_POST['category'];
+
+    if (empty($_POST["ticketprice"])) {
+        $arrayErr["priceErr"] = "Price is required";
+    } else if (!is_numeric($_POST["ticketprice"])) {
+        $arrayErr["priceErr"] = "Price must be a number";
+    } else {
+        $editedTicketprice = $_POST['ticketprice'];
+    }
+    // $website = $_POST['website'];
+    if (empty($_POST['website'])) {
+        $editedWebsite = "";
+    } else {
+        $inputWebsite = filter_var($_POST['website'], FILTER_SANITIZE_URL);
+        if (!filter_var($inputWebsite, FILTER_VALIDATE_URL)) {
+            $arrayErr["urlErr"] = "Invalid URL";
+        } else {
+            $editedWebsite = $inputWebsite;
+        }
+    }
+    if (!(empty($arrayErr))) {
+        foreach ($arrayErr as  $value) {
+        echo "$value <br>";
+    }
+    } else {
+        $events = new Event();
+        $events->editEvent($_POST['eventID'], $editedTitle, $editedInfo, $editedLocation, $editedStarttime, $editedCat, $editedEndtime, $editedTicketprice, $editedWebsite);
+        echo "Event Changed";
+    }
     // $redirect = "event.php?event_id=" . $_POST['eventID'];
     // header('Location: event.php/event_id=3');
 }
