@@ -1,6 +1,7 @@
 <?php 
 include "./assets/inc/header.php";
 require __DIR__."/assets/lib/class.User.php";
+require __DIR__."/assets/inc/stringFilter.php";
 
 // session_start();
 // // Check if the user is already logged in, if yes then redirect him to welcome page
@@ -31,7 +32,6 @@ require __DIR__."/assets/lib/class.User.php";
         </div>
     </body>
 <?php  
-    $arrayInput = array();
     $arrayErr = array();
     $username = $password = "";
 
@@ -48,18 +48,18 @@ require __DIR__."/assets/lib/class.User.php";
             if (!filter_var($emailSanitized, FILTER_VALIDATE_EMAIL)) {
                 $arrayErr["emailErr"] = "Invalid email";
             } else {
-                $arrayInput["username"] = $emailSanitized;
                 $username = $emailSanitized;
             }
         }
         // de tre neste kodeblokkene opperer på samme måte som den over.
         if (empty($_POST["password"])) {
             $arrayErr["enameErr"] = "Password is required";
-        } else {
+        } else if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['password'])) {
+            $arrayErr["passErr"] = 'The password does not meet the requirements!';
+        }
+        else {
             //passord blir hashet så trenger ikke desinfisering
-            $arrayInput["password"] = $_POST["password"];
-            $inputPassword = $_POST['password'];
-            $password = $_POST["password"];
+            $password = stringFilter($_POST["password"]);
         }
         // hvis error-matrisen ikke er tom, print feil
         if (!(empty($arrayErr))) {
@@ -69,7 +69,6 @@ require __DIR__."/assets/lib/class.User.php";
         } else {
             $users = new User();
             $validateUser = $users->validateUser($username, $password);
-            echo "valid";
         }
     }
 

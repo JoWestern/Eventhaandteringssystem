@@ -91,21 +91,30 @@ if (isset($_POST["submit"])) {
     if (empty($_POST["title"])) {
         $arrayErr["titleErr"] = "Title is required";
         // sjekker om input er med riktige tegn.
-    } else {
+    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+        $nameErr = "Only letters and white space allowed";
+    }
+    else {
         $title = stringFilter($_POST['title']);
     }
     // $title = filter_var($_POST['title'], FILTER_CALLBACK, array('options' => 'my_filter'));
     if (empty($_POST["bio"])) {
         $arrayErr["bioErr"] = "Bio is required";
         // sjekker om input er med riktige tegn.
-    } else {
+    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+        $nameErr = "Only letters and white space allowed";
+    }
+    else {
         $info = stringFilter($_POST['bio']);
     }
     // $info = filter_var($_POST['bio'], FILTER_CALLBACK, array('options' => 'my_filter'));
     if (empty($_POST["local"])) {
         $arrayErr["fnameErr"] = "Local is required";
         // sjekker om input er med riktige tegn.
-    } else {
+    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+        $nameErr = "Only letters and white space allowed";
+    }
+    else {
         $location = stringFilter($_POST['local']);
     }
     // $location = filter_var($_POST['local'], FILTER_CALLBACK, array('options' => 'my_filter'));
@@ -115,14 +124,25 @@ if (isset($_POST["submit"])) {
     $starttime = $_POST['startdate'];
     $endtime = $_POST['enddate'];
     $cat = $_POST['category'];
-    $ticketprice = $_POST['ticketprice'];
+
+    if (empty($_POST["ticketprice"])) {
+        $arrayErr["priceErr"] = "Price is required";
+    } else if (!is_numeric($_POST["ticketprice"])) {
+        $arrayErr["priceErr"] = "Price must be a number";
+    } else {
+        $ticketprice = $_POST['ticketprice'];
+    }
 
     // $website = $_POST['website'];
-    $inputWebsite = filter_var($_POST['website'], FILTER_SANITIZE_URL);
-    if (!filter_var($inputWebsite, FILTER_VALIDATE_URL)) {
-        $arrayErr["urlErr"] = "Invalid URL";
+    if (empty($_POST['website'])) {
+        $website = "";
     } else {
-        $website = $inputWebsite;
+        $inputWebsite = filter_var($_POST['website'], FILTER_SANITIZE_URL);
+        if (!filter_var($inputWebsite, FILTER_VALIDATE_URL)) {
+            $arrayErr["urlErr"] = "Invalid URL";
+        } else {
+            $website = $inputWebsite;
+        }
     }
 
     // checkFile();
