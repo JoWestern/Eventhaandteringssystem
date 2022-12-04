@@ -35,7 +35,7 @@ class Event{
         $dbConn = new DbConn();
         $conn = $dbConn->connect();
 
-        $sql = "SELECT event_id, title, info, first_name, last_name, location, time, name, endtime, ticketprice, website
+        $sql = "SELECT event_id, title, info, host, first_name, last_name, location, time, name, endtime, ticketprice, website
         FROM events
         INNER JOIN eventhandling.users ON users.user_id = events.host
         INNER JOIN eventhandling.categories ON categories.category_id = events.category_id 
