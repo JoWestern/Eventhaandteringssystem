@@ -39,9 +39,15 @@ echo '
         </div>
     </div>
 </body>';
-
+$arrayErr = array();
 if (isset($_POST["edit"])) {
-    if(!password_verify($_POST['oldpassword'], $thisUser->password)){
+    $oldPass = $_POST['oldpassword'];
+    $newPass = $_POST['newpassword'];
+    $confirmPass = $_POST['confirmpassword'];
+
+    if (empty($_POST['oldpassword']) || empty($_POST['newpassword']) || empty($_POST['confirmpassword'])) {
+        $arrayErr['oldpassErr'] = "Password is required";
+    } else if(!password_verify($_POST['oldpassword'], $thisUser->password)){
         echo "Feil passord";
         die();
     }

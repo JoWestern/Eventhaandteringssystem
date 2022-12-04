@@ -42,10 +42,13 @@ if (isset($_POST["submit"])) {
         if (empty($_POST["firstname"])) {
             $arrayErr["fnameErr"] = "Firstname is required";
             // sjekker om input er med riktige tegn.
-        } else {
+        } if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+            $arrayErr = "Only letters and white space allowed";
+        }
+        else {
             $firstname = stringFilter($_POST['firstname']);
         }
-        
+
         if (empty($_POST["lastname"])) {
             $arrayErr["lnameErr"] = "Lastname is required";
             // sjekker om input er med riktige tegn.
@@ -69,7 +72,10 @@ if (isset($_POST["submit"])) {
         if (empty($_POST["password"]) || empty($_POST["passwordconfirm"])) {
             $arrayErr["passErr"] = "Password is required";
             // sjekker om input er med riktige tegn.
-        } else if ($_POST['password'] !== $_POST['passwordconfirm']){
+        } else if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['password'])) {
+            $arrayErr["passErr"] = 'The password does not meet the requirements!';
+        }
+        else if ($_POST['password'] !== $_POST['passwordconfirm']){
             $arrayErr["nameErr"] = "Passordene må være like";
         }
         else {
