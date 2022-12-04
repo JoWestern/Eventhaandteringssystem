@@ -18,7 +18,7 @@ class Event{
         }
         else $time = " AND time < CURRENT_DATE ";
 
-        $sql = "SELECT event_id, title, info, location, time 
+        $sql = "SELECT event_id, title, info, location, time, img_path 
         FROM eventhandling.events
         INNER JOIN eventhandling.users ON users.user_id = events.host"
         . $time .
@@ -35,7 +35,7 @@ class Event{
         $dbConn = new DbConn();
         $conn = $dbConn->connect();
 
-        $sql = "SELECT event_id, title, info, host, first_name, last_name, location, time, name, endtime, ticketprice, website
+        $sql = "SELECT event_id, title, info, host, first_name, last_name, location, time, name, endtime, ticketprice, website, img_path
         FROM events
         INNER JOIN eventhandling.users ON users.user_id = events.host
         INNER JOIN eventhandling.categories ON categories.category_id = events.category_id 
@@ -82,7 +82,7 @@ class Event{
         }
         else $time = " AND time < CURRENT_DATE ";
 
-        $sql = "SELECT event_id, title, info, location, time 
+        $sql = "SELECT event_id, title, info, location, time, img_path 
         FROM eventhandling.events
         INNER JOIN eventhandling.users ON users.user_id = events.host
         WHERE host = $host" . $time . 
@@ -95,7 +95,7 @@ class Event{
         $conn->close();
     }
 
-    function editEvent($eventID, $title, $info, $location, $time, $categoryID, $endtime, $ticketprice, $website){
+    function editEvent($eventID, $title, $info, $location, $time, $categoryID, $endtime, $ticketprice, $website, $img_url){
         $dbConn = new DbConn();
         $conn = $dbConn->connect();
 
@@ -109,11 +109,12 @@ class Event{
                 category_id = ?,
                 endtime = ?,
                 ticketprice = ?,
-                website = ? 
+                website = ?,
+                img_path = ? 
             WHERE event_id = $eventID;"
         );
 
-        $stmt->bind_param('ssssisss', $title, $info, $location, $time, $categoryID, $endtime, $ticketprice, $website);
+        $stmt->bind_param('ssssissss', $title, $info, $location, $time, $categoryID, $endtime, $ticketprice, $website, $img_url);
         
         try{
             $stmt->execute();

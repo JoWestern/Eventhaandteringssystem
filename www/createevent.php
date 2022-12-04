@@ -163,7 +163,7 @@ if (isset($_POST["submit"])) {
 function checkFile() {
     // Define array for messages 
     $messages = array();
-    $semiPath = "/Eventhaandteringssystem/www/assets/img/";
+    $semiPath = "assets/img/";
     $filepathStock = $semiPath . "stock.png";
     // File upload 
     if (is_uploaded_file($_FILES['imgFile']['tmp_name'])) 

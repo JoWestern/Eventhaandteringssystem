@@ -85,10 +85,9 @@ $website = $thisEvent->website;
                     </div>
                     <div class="form-group mb-3">
                         <div class="form-floating" style="margin:5px;">
-                            <label for="imgFile">Legg til bilde:</label>
+                        <label for="imgFile">Legg til bilde: (kun .jpg og .png)</label>
                             <div>
                                 <input name="imgFile" type="file">
-                                <input name="show" type="submit" value="Lagre bilde">
                             </div>
                         </div>
                     <input type='hidden' name='eventID' value='<?php echo $_POST['eventID']?>'>
@@ -161,13 +160,18 @@ if (isset($_POST["submit"])) {
             $editedWebsite = $inputWebsite;
         }
     }
+
+    if (isset($_FILES['imgFile'])) {
+        $img_url = checkFile();
+    }
+
     if (!(empty($arrayErr))) {
         foreach ($arrayErr as  $value) {
         echo "$value <br>";
     }
     } else {
         $events = new Event();
-        $events->editEvent($_POST['eventID'], $editedTitle, $editedInfo, $editedLocation, $editedStarttime, $editedCat, $editedEndtime, $editedTicketprice, $editedWebsite);
+        $events->editEvent($_POST['eventID'], $editedTitle, $editedInfo, $editedLocation, $editedStarttime, $editedCat, $editedEndtime, $editedTicketprice, $editedWebsite, $img_url);
         echo "Event Changed";
     }
     // $redirect = "event.php?event_id=" . $_POST['eventID'];
@@ -178,7 +182,8 @@ if (isset($_POST["submit"])) {
 function checkFile() {
     // Define array for messages 
     $messages = array();
-    
+    $semiPath = "assets/img/";
+    $filepathStock = $semiPath . "stock.png";
     // File upload 
     if (is_uploaded_file($_FILES['imgFile']['tmp_name'])) 
     {
@@ -220,14 +225,6 @@ function checkFile() {
         // If success
         if (empty($messages)) 
         {
-            /*if user has picture but of different type, 
-            the old gets deleted instead of there being two*/
-            foreach($acc_file_types as $value){
-                $file = "gunnar" . '.' . array_search($value, $acc_file_types);
-                if (file_exists($dir . $file)) {
-                    unlink($dir . $file);
-                }
-            }
 
             // Moving uploaded file
             $filepath = $dir . $filename;
@@ -235,19 +232,17 @@ function checkFile() {
            
             if ($uploaded_file){
                 $messages['success'][] = "Filen ble lastet opp!";
-                $img = "assets/img/" . $filename;
-                return $img;
+                $imgPath = $semiPath . $filename;
+                return $imgPath;
             } else {
                 $messages['error'][] = "Not uploaded because of error #".$_FILES["imgFile"]["error"];
-                $img = "assets/img/stock.png";
-                return $img;
+                return $filepathStock;
             }
         }
-
-    } else {
+    } 
+    else {
         $messages['error'][] = "Ingen fil er lastet opp";
-        $img = "/stock.png";
-        return $img;
+        return $filepathStock;
     }
 }
 

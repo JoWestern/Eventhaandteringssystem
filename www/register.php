@@ -52,7 +52,8 @@ if (isset($_POST["submit"])) {
         if (empty($_POST["lastname"])) {
             $lastname = "";
             // sjekker om input er med riktige tegn.
-        } else if (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['lastname'])) {
+        } else 
+        if (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['lastname'])) {
             $arrayErr = "Only letters and white space allowed";
         }
         else {
