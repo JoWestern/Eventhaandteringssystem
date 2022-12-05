@@ -49,7 +49,13 @@ if (isset($_POST["submit"])) {
 
     $host = $_SESSION['USER_ID'];
 
-    $starttime = $_POST['startdate'];
+    if ($_POST['startdate'] == null) {
+        $startdateErr = "Startdato er påkrevd";
+        $arrayErr = $startdateErr;
+    } else {
+        $starttime = $_POST['startdate'];
+    }
+
     if ($_POST['enddate'] == null){
         $endtime = null;
     }
@@ -194,6 +200,9 @@ function displayImage($src) {
                     <label for="startdate">Startdato:</label>
                     <div class="form-floating">
                         <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off">
+                        <?php 
+                            if(isset($startdateErr)) displayerror($startdateErr); 
+                            ?>
                     </div>
                     <label for="enddate">Sluttdato:</label>
                     <div class="form-floating">
