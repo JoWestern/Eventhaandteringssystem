@@ -135,3 +135,7 @@
 .user-info{
     text-align: center;
 }
+
+label{
+    margin-top: 10px;
+}
