@@ -52,8 +52,6 @@ require __DIR__."/assets/lib/class.User.php";
         // de tre neste kodeblokkene opperer på samme måte som den over.
         if (empty($_POST["password"])) {
             $arrayErr["enameErr"] = "Password is required";
-        } else if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['password'])) {
-            $arrayErr["passErr"] = 'The password does not meet the requirements!';
         }
         else {
             //passord blir hashet så trenger ikke desinfisering

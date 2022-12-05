@@ -77,7 +77,7 @@ echo
                 </form>";
             
             if (isset($_POST["delete"])) {
-                echo "Arrangementet ble slettet";
+                $event->deleteEvent($eventID);
             }
         
         echo
