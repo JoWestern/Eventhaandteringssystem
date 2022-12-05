@@ -127,7 +127,21 @@ class Event{
         $conn->close();
     }
     
-    function deleteEvent(){
+    function deleteEvent($eventID){
+        $dbConn = new DbConn();
+        $conn = $dbConn->connect();
+
+        $stmt = $conn->prepare(
+            "DELETE FROM events
+            WHERE event_id = $eventID;");
+        
+        try{
+            $stmt->execute();
+            echo "Arrangementet ble slettet";
+        }
+        catch (Exception $e){
+            echo "Noe gikk galt, eventet ble ikke slettet";
+}
 
     }
 }
