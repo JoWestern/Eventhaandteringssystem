@@ -90,8 +90,13 @@ if (isset($_POST["submit"])) {
     // checkFile();
     if ((empty($arrayErr))) {
         $events = new Event();
-        $CreateEvent = $events->createEvent($title, $info, $host, $location, $starttime, $cat, $endtime, $ticketprice, $website, $img_url);
-        echo "<p class='mb-3 fw-normal'>Arrangementet er opprettet!</p>";
+        if (
+            $CreateEvent = $events->createEvent($title, $info, $host, $location, $starttime, $cat, $endtime, $ticketprice, $website, $img_url)
+        ){
+            $success = "Arrangement opprettet!";
+        } else {
+            $unsuccess = "Det oppstod en feil";
+        }
     }
 }
 
@@ -176,6 +181,13 @@ function displayImage($src) {
         </div>
             <form method="POST" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> autocomplete="off" enctype="multipart/form-data">
                 <h1 class="h3 mb-3 fw-normal">Opprett arrangement</h1>
+                <?php 
+                 if (isset($success)) {
+                    echo "<small><p style='color: green;'><b>".$success."</b></p></small>";
+                } else if (isset($unsuccess)) {
+                    echo "<small><p style='color: red;'><b>".$unsuccess."</b></p></small>";
+                }
+                ?>
                     <label for="title">Tittel:</label>
                     <div class="form-floating">
                         <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off">

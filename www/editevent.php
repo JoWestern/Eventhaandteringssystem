@@ -62,9 +62,21 @@ if (isset($_POST["submit"])) {
     // $location = filter_var($_POST['local'], FILTER_CALLBACK, array('options' => 'my_filter'));
 
     $host = $_SESSION['USER_ID'];
-    
-    $editedStarttime = $_POST['startdate'];
-    $editedEndtime = $_POST['enddate'];
+
+    if ($_POST['startdate'] == null) {
+        $startdateErr = "Startdato er påkrevd";
+        $arrayErr = $startdateErr;
+    } else {
+        $editedStarttime = $_POST['startdate'];
+    }
+
+    if ($_POST['enddate'] == null){
+        $endtime = null;
+    } else {
+        $editedEndtime = $_POST['enddate'];
+    }
+
+
     $editedCat = $_POST['category'];
 
     if (empty($_POST["ticketprice"])) {
@@ -94,8 +106,13 @@ if (isset($_POST["submit"])) {
 
     if ((empty($arrayErr))) {
         $events = new Event();
-        $events->editEvent($_POST['eventID'], $editedTitle, $editedInfo, $editedLocation, $editedStarttime, $editedCat, $editedEndtime, $editedTicketprice, $editedWebsite, $img_url);
-        echo "Event Changed";
+        if (
+            $successEvent = $events->editEvent($_POST['eventID'], $editedTitle, $editedInfo, $editedLocation, $editedStarttime, $editedCat, $editedEndtime, $editedTicketprice, $editedWebsite, $img_url)
+        ){
+            $success = "Event changed!";
+        } else {
+            $unsuccess = "Det oppstod en feil";
+        }
     }
     // $redirect = "event.php?event_id=" . $_POST['eventID'];
     // header('Location: event.php/event_id=3');
@@ -195,6 +212,13 @@ function displayImage($src) {
         </div>
             <form method="POST" action='' autocomplete="off" enctype="multipart/form-data">
                 <h1 class="h3 mb-3 fw-normal">Endre arrangement</h1>
+                <?php 
+                 if (isset($success)) {
+                    echo "<small><p style='color: green;'><b>".$success."</b></p></small>";
+                } else if (isset($unsuccess)) {
+                    echo "<small><p style='color: red;'><b>".$unsuccess."</b></p></small>";
+                }
+                ?>
                     <label for="title">Tittel:</label>
                     <div class="form-floating">
                         <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off" value="<?php echo $title ?>">
@@ -219,6 +243,9 @@ function displayImage($src) {
                     <label for="startdate">Startdato:</label>
                     <div class="form-floating">
                         <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off"  value="<?php echo $time ?>">
+                        <?php 
+                        if(isset($startdateErr)) displayerror($startdateErr); 
+                        ?>
                     </div>
                     <label for="enddate">Sluttdato:</label>
                     <div class="form-floating">
