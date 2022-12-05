@@ -114,7 +114,7 @@ if (isset($_POST["submit"])) {
     if (empty($_POST["title"])) {
         $arrayErr["titleErr"] = "Title is required";
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["title"])) {
+    } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/', $_POST["title"])) {
         $arrayErr["titleErr"] = "Only letters and white space allowed (title)";
     }
     else {
@@ -124,7 +124,7 @@ if (isset($_POST["submit"])) {
     if (empty($_POST["bio"])) {
         $arrayErr["bioErr"] = "Bio is required";
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["bio"])) {
+    } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/',$_POST["bio"])) {
         $arrayErr["bioErr"] = "Only letters and white space allowed (info)";
     }
     else {
@@ -134,7 +134,7 @@ if (isset($_POST["submit"])) {
     if (empty($_POST["local"])) {
         $arrayErr["fnameErr"] = "Location is required";
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["local"])) {
+    } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/',$_POST["local"])) {
         $arrayErr["fnameErr"] = "Only letters and white space allowed (location)";
     }
     else {
@@ -172,7 +172,7 @@ if (isset($_POST["submit"])) {
     }
 
     if (!(empty($arrayErr))) {
-        foreach ($arrayErr as  $value) {
+        foreach ($arrayErr as $value) {
         echo "$value <br>";
     }
     } else {
