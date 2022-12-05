@@ -32,7 +32,7 @@ require __DIR__."/assets/inc/stringFilter.php";
                     <input type="number" id="phone" name="phone" autocomplete="off">
                 </div>
                 <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="submit" value="Registrer" autocomplete="off"></input>
-                <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="login" value="til login" autocomplete="off" />
+                <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="login" value="Til login" autocomplete="off" />
             </form>
         </div>
     </div>

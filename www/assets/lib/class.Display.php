@@ -9,7 +9,7 @@
                 while($row = $result->fetch_assoc()) {
                     $datetime = new DateTimeImmutable($row['time']);
 
-                    if(file_exists($row['img_path'])) $img = $img = $row['img_path'];
+                    if(file_exists($row['img_path'])) $img = $row['img_path'];
                     else $img = "assets/img/stock.png";
 
                     if(strlen($row['info']) > 200){

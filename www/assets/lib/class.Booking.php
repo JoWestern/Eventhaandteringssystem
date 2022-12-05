@@ -18,7 +18,7 @@ class Booking{
         }
         else $time = " AND time < CURRENT_DATE ";
 
-        $sql = "SELECT bookings.event_id as event_id, title, info, time, location 
+        $sql = "SELECT bookings.event_id as event_id, title, info, time, location, img_path 
         FROM eventhandling.bookings
         INNER JOIN events ON bookings.event_id = events.event_id
         INNER JOIN users ON events.host = users.user_id

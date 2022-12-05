@@ -24,7 +24,6 @@ require __DIR__."/assets/lib/class.User.php";
 
                         <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="login" value="Logg inn" autocomplete="off" />
                         <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="register" value="Registrer" autocomplete="off" />
-                        <p class="mt-5 mb-3 text-muted">© 2022</p>
                     </form>
                 </div>
             </main>
