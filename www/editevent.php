@@ -16,6 +16,7 @@ $location = $thisEvent->location;
 $time = $thisEvent->time;
 $endtime = $thisEvent->endtime;
 $ticketprice = $thisEvent->ticketprice;
+$category_id = $thisEvent->category_id;
 $website = $thisEvent->website;
 $img = $thisEvent->img_path;
 
@@ -79,7 +80,7 @@ $img = $thisEvent->img_path;
                                 $category = new Category();
                                 $categoryOptions = $category->selectCategory();
                                 while ($row = mysqli_fetch_array($categoryOptions)) {
-                                    echo "<option value='" . $row['category_id'] . "'>" . $row['name'] . "</option>";
+                                    echo "<option value='" . $row['category_id'] . "' "; if($row['category_id'] == $category_id) echo "selected"; echo ">" . $row['name'] . "</option>";
                                 }
                             ?>
                         </select>
