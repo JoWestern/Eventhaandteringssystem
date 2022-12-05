@@ -1,6 +1,8 @@
 <?php 
 include "./assets/inc/header.php";
 require __DIR__."/assets/lib/class.User.php";
+require __DIR__."/assets/inc/displayError.php";
+
 
 // session_start();
 // // Check if the user is already logged in, if yes then redirect him to welcome page
@@ -8,28 +10,6 @@ require __DIR__."/assets/lib/class.User.php";
 //     header("location: mineArrangementer.php");
 //     exit();
 // }
-?>
-    <body class="text-center">
-        <div class="container login" style="width: fit-content">
-            <main class="form-signin w-100 m-auto">
-                <div class="main">
-                    <form method="POST" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> autocomplete="off">  
-                        <h1 class="h3 mb-3 fw-normal">Logg inn</h1>
-                        <div class="form-floating">
-                            <input type="email" id="username" name="username" placeholder="E-post" autocomplete="off">
-                        </div>
-                        <div class="form-floating">
-                            <input type="password" id="password" name="password" placeholder="Passord" autocomplete="off">
-                        </div>
-
-                        <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="login" value="Logg inn" autocomplete="off" />
-                        <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="register" value="Registrer" autocomplete="off" />
-                    </form>
-                </div>
-            </main>
-        </div>
-    </body>
-<?php  
     $arrayErr = array();
     $username = $password = "";
 
@@ -37,21 +17,24 @@ require __DIR__."/assets/lib/class.User.php";
         //sjekker om navnefeltet er tomt.
 
         if (empty($_POST["username"])) {
-            $arrayErr["nameErr"] = "Username is required";
+            $nameErr = "Brukernavn er påkrevd";
+            $arrayErr = $nameErr;
             // sjekker om input er med riktige tegn.
         } else {
             // input er riktig og blir lagt inn i array
             $email = $_POST["username"];
             $emailSanitized = filter_var($email, FILTER_SANITIZE_EMAIL);
             if (!filter_var($emailSanitized, FILTER_VALIDATE_EMAIL)) {
-                $arrayErr["emailErr"] = "Invalid email";
+                $nameErr = "Ugyldig E-post";
+                $arrayErr = $nameErr;
             } else {
                 $username = $emailSanitized;
             }
         }
         // de tre neste kodeblokkene opperer på samme måte som den over.
         if (empty($_POST["password"])) {
-            $arrayErr["enameErr"] = "Password is required";
+            $passErr = "Passord er påkrevd";
+            $arrayErr = $passErr;
         }
         else {
             //passord blir hashet så trenger ikke desinfisering
@@ -78,3 +61,29 @@ function redirect($url) {
     exit();
 }
 ?>
+<body class="text-center">
+        <div class="container login" style="width: fit-content">
+            <main class="form-signin w-100 m-auto">
+                <div class="main">
+                    <form method="POST" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> autocomplete="off">  
+                        <h1 class="h3 mb-3 fw-normal">Logg inn</h1>
+                        <div class="form-floating">
+                            <input type="email" id="username" name="username" placeholder="E-post" autocomplete="off">
+                            <?php 
+                            if(isset($nameErr)) displayerror($nameErr); 
+                            ?>
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" id="password" name="password" placeholder="Passord" autocomplete="off">
+                            <?php 
+                            if(isset($passErr)) displayerror($passErr); 
+                            ?>
+                        </div>
+
+                        <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="login" value="Logg inn" autocomplete="off" />
+                        <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="register" value="Registrer" autocomplete="off" />
+                    </form>
+                </div>
+            </main>
+        </div>
+    </body>

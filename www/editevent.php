@@ -4,6 +4,7 @@ require dirname(__DIR__) . "/www/assets/lib/class.Event.php";
 require dirname(__DIR__) . "/www/assets/lib/class.Category.php";
 require __DIR__."/assets/inc/authenticate.php";
 require __DIR__."/assets/inc/stringFilter.php";
+require __DIR__."/assets/inc/displayError.php";
 
 $event = new Event();
 $result = $event->singleEvent($_POST['eventID']);
@@ -20,122 +21,40 @@ $category_id = $thisEvent->category_id;
 $website = $thisEvent->website;
 $img = $thisEvent->img_path;
 
-?>
-<!doctype html>
-<html>
-    <body class="main text-left">
-        <div class="container login mt-5" style="width: fit-content">
-        <div class="img-fluid">
-        <?php 
-            // $img = "assets/img/stock.png";
-            // function showPic($filename){
-            if (isset($_POST["show"])){
-                $src = checkFile();
-                displayImage($src);
-            } elseif(file_exists($img)){
-                $src = $img;
-                displayImage($src);
-            } 
-            else {
-                $src = "assets/img/stock.png";
-                displayImage($src);
-            }
-        ?>
-        </div>
-            <form method="POST" action='' autocomplete="off" enctype="multipart/form-data">
-                <h1 class="h3 mb-3 fw-normal">Endre arrangement</h1>
-                    <label for="title">Tittel:</label>
-                    <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off" value="<?php echo $title ?>">
-                    </div>
-                    <label for="bio">Beskrivelse:</label>
-                    <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="bio" name="bio" autocomplete="off" value="<?php echo $info ?>">
-                    </div>
-                    <label for="local">Sted:</label>
-                    <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="local" name="local" autocomplete="off" value="<?php echo $location ?>">
-                    </div>
-                    <label for="startdate">Startdato:</label>
-                    <div class="form-floating">
-                        <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off"  value="<?php echo $time ?>">
-                    </div>
-                    <label for="enddate">Sluttdato:</label>
-                    <div class="form-floating">
-                        <input class="form-control form-control-sm" type="datetime-local" id="enddate" name="enddate" autocomplete="off"  value="<?php echo $endtime ?>">
-                    </div>
-                    <label for="ticketprice">Pris:</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">kr</span>
-                        </div>
-                        <div class="form-floating">
-                            <input class="form-control" type="number" id="ticketprice" name="ticketprice" autocomplete="off" value="<?php echo $ticketprice ?>">
-                        </div>
-                    </div>
-                    <label class="mt-1" for="cat">Kategori:</label>
-                    <div class="form-floating">
-                        <select class="form-control form-control-sm" name="category">
-                            <?php
-                                $category = new Category();
-                                $categoryOptions = $category->selectCategory();
-                                while ($row = mysqli_fetch_array($categoryOptions)) {
-                                    echo "<option value='" . $row['category_id'] . "' "; if($row['category_id'] == $category_id) echo "selected"; echo ">" . $row['name'] . "</option>";
-                                }
-                            ?>
-                        </select>
-                    </div>
-                    <label for="website">Link til nettside:</label>
-                    <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="website" name="website" autocomplete="off" value="<?php echo $website ?>">
-                    </div>
-                    <div class="form-group mb-3">
-                        <div class="form-floating" style="margin:5px;">
-                        <label for="imgFile">Legg til bilde: (kun .jpg og .png)</label>
-                            <div>
-                                <input name="imgFile" type="file">
-                            </div>
-                        </div>
-                    <input type='hidden' name='eventID' value='<?php echo $_POST['eventID']?>'>
-                    <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="submit" value="Endre" autocomplete="off"></input>
-                </div>
-            </form>
-        </div>
-    </body>
-</html>
-<?php
-// if (isset($_POST["show"])){
-//     $img = "assets/img/stock.png";
-//     echo "<img class='' src=\"" . $img . "\" alt=\"Arrangementsbilde\" width='600rem'>";
-// }
 $arrayErr = array();
 if (isset($_POST["submit"])) {
     // legge inn check for hvert felt
     if (empty($_POST["title"])) {
-        $arrayErr["titleErr"] = "Title is required";
+        $titleErr = "Tittel er påkrevd";
+        $arrayErr["titleErr"] = $titleErr;
         // sjekker om input er med riktige tegn.
     } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/', $_POST["title"])) {
-        $arrayErr["titleErr"] = "Only letters and white space allowed (title)";
+        $titleErr = "Kun bokstaver, tall og tegn";
+        $arrayErr["titleErr"] = $titleErr;
     }
     else {
         $editedTitle = stringFilter($_POST['title']);
     }
     // $title = filter_var($_POST['title'], FILTER_CALLBACK, array('options' => 'my_filter'));
     if (empty($_POST["bio"])) {
-        $arrayErr["bioErr"] = "Bio is required";
+        $bioErr = "Beskrivelse er påkrevd";
+        $arrayErr["bioErr"] = $bioErr;
         // sjekker om input er med riktige tegn.
     } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/',$_POST["bio"])) {
-        $arrayErr["bioErr"] = "Only letters and white space allowed (info)";
+        $bioErr = "Kun bokstaver, tall og tegn";
+        $arrayErr["bioErr"] = $bioErr;
     }
     else {
         $editedInfo = stringFilter($_POST['bio']);
     }
     // $info = filter_var($_POST['bio'], FILTER_CALLBACK, array('options' => 'my_filter'));
     if (empty($_POST["local"])) {
-        $arrayErr["fnameErr"] = "Location is required";
+        $localErr = "Sted er påkrevd";
+        $arrayErr["fnameErr"] = $localErr;
         // sjekker om input er med riktige tegn.
     } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/',$_POST["local"])) {
-        $arrayErr["fnameErr"] = "Only letters and white space allowed (location)";
+        $localErr = "Kun bokstaver, tall og tegn";
+        $arrayErr["fnameErr"] = $localErr;
     }
     else {
         $editedLocation = stringFilter($_POST['local']);
@@ -151,7 +70,8 @@ if (isset($_POST["submit"])) {
     if (empty($_POST["ticketprice"])) {
         $editedTicketprice = "";
     } else if (!is_numeric($_POST["ticketprice"])) {
-        $arrayErr["priceErr"] = "Price must be a number";
+        $ticketErr = "Pris må være et tall";
+        $arrayErr["priceErr"] = $ticketErr;
     } else {
         $editedTicketprice = $_POST['ticketprice'];
     }
@@ -161,7 +81,8 @@ if (isset($_POST["submit"])) {
     } else {
         $inputWebsite = filter_var($_POST['website'], FILTER_SANITIZE_URL);
         if (!filter_var($inputWebsite, FILTER_VALIDATE_URL)) {
-            $arrayErr["urlErr"] = "Invalid URL";
+            $urlErr = "Ugyldig URL";
+            $arrayErr["urlErr"] = $urlErr;
         } else {
             $editedWebsite = $inputWebsite;
         }
@@ -171,11 +92,7 @@ if (isset($_POST["submit"])) {
         $img_url = checkFile();
     }
 
-    if (!(empty($arrayErr))) {
-        foreach ($arrayErr as $value) {
-        echo "$value <br>";
-    }
-    } else {
+    if ((empty($arrayErr))) {
         $events = new Event();
         $events->editEvent($_POST['eventID'], $editedTitle, $editedInfo, $editedLocation, $editedStarttime, $editedCat, $editedEndtime, $editedTicketprice, $editedWebsite, $img_url);
         echo "Event Changed";
@@ -256,3 +173,99 @@ function displayImage($src) {
     echo "<img class='placeholderImg' id='showPic' src='" . $src . "' alt=\"Arrangementsbilde\" style=\"width: 20rem; margin: 150px;\">";
 }
 ?>
+
+<!doctype html>
+<html>
+    <body class="main text-left">
+        <div class="container login mt-5" style="width: fit-content">
+        <div class="img-fluid">
+        <?php 
+            if (isset($_POST["show"])){
+                $src = checkFile();
+                displayImage($src);
+            } elseif(file_exists($img)){
+                $src = $img;
+                displayImage($src);
+            } 
+            else {
+                $src = "assets/img/stock.png";
+                displayImage($src);
+            }
+        ?>
+        </div>
+            <form method="POST" action='' autocomplete="off" enctype="multipart/form-data">
+                <h1 class="h3 mb-3 fw-normal">Endre arrangement</h1>
+                    <label for="title">Tittel:</label>
+                    <div class="form-floating">
+                        <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off" value="<?php echo $title ?>">
+                        <?php 
+                        if(isset($titleErr)) displayerror($titleErr); 
+                        ?>
+                    </div>
+                    <label for="bio">Beskrivelse:</label>
+                    <div class="form-floating">
+                        <input class="form-control form-control-sm" type="text" id="bio" name="bio" autocomplete="off" value="<?php echo $info ?>">
+                        <?php 
+                        if(isset($bioErr)) displayerror($bioErr); 
+                        ?>
+                    </div>
+                    <label for="local">Sted:</label>
+                    <div class="form-floating">
+                        <input class="form-control form-control-sm" type="text" id="local" name="local" autocomplete="off" value="<?php echo $location ?>">
+                        <?php 
+                        if(isset($localErr)) displayerror($localErr); 
+                        ?>
+                    </div>
+                    <label for="startdate">Startdato:</label>
+                    <div class="form-floating">
+                        <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off"  value="<?php echo $time ?>">
+                    </div>
+                    <label for="enddate">Sluttdato:</label>
+                    <div class="form-floating">
+                        <input class="form-control form-control-sm" type="datetime-local" id="enddate" name="enddate" autocomplete="off"  value="<?php echo $endtime ?>">
+                    </div>
+                    <label for="ticketprice">Pris:</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">kr</span>
+                        </div>
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="ticketprice" name="ticketprice" autocomplete="off" value="<?php echo $ticketprice ?>">
+                            <?php 
+                            if(isset($ticketErr)) displayerror($ticketErr); 
+                            ?>
+                        </div>
+                    </div>
+                    <label class="mt-1" for="cat">Kategori:</label>
+                    <div class="form-floating">
+                        <select class="form-control form-control-sm" name="category">
+                            <?php
+                                $category = new Category();
+                                $categoryOptions = $category->selectCategory();
+                                while ($row = mysqli_fetch_array($categoryOptions)) {
+                                    echo "<option value='" . $row['category_id'] . "' "; if($row['category_id'] == $category_id) echo "selected"; echo ">" . $row['name'] . "</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <label for="website">Link til nettside:</label>
+                    <div class="form-floating">
+                        <input class="form-control form-control-sm" type="text" id="website" name="website" autocomplete="off" value="<?php echo $website ?>">
+                        <?php 
+                        if(isset($urlErr)) displayerror($urlErr); 
+                        ?>
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="form-floating" style="margin:5px;">
+                        <label for="imgFile">Legg til bilde: (kun .jpg og .png)</label>
+                            <div>
+                                <input name="imgFile" type="file">
+                            </div>
+                        </div>
+                    <input type='hidden' name='eventID' value='<?php echo $_POST['eventID']?>'>
+                    <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="submit" value="Endre" autocomplete="off"></input>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
