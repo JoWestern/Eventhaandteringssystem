@@ -16,7 +16,9 @@ $location = $thisEvent->location;
 $time = $thisEvent->time;
 $endtime = $thisEvent->endtime;
 $ticketprice = $thisEvent->ticketprice;
+$category_id = $thisEvent->category_id;
 $website = $thisEvent->website;
+$img = $thisEvent->img_path;
 
 ?>
 <!doctype html>
@@ -30,7 +32,11 @@ $website = $thisEvent->website;
             if (isset($_POST["show"])){
                 $src = checkFile();
                 displayImage($src);
-            } else {
+            } elseif(file_exists($img)){
+                $src = $img;
+                displayImage($src);
+            } 
+            else {
                 $src = "assets/img/stock.png";
                 displayImage($src);
             }
@@ -74,7 +80,7 @@ $website = $thisEvent->website;
                                 $category = new Category();
                                 $categoryOptions = $category->selectCategory();
                                 while ($row = mysqli_fetch_array($categoryOptions)) {
-                                    echo "<option value='" . $row['category_id'] . "'>" . $row['name'] . "</option>";
+                                    echo "<option value='" . $row['category_id'] . "' "; if($row['category_id'] == $category_id) echo "selected"; echo ">" . $row['name'] . "</option>";
                                 }
                             ?>
                         </select>
@@ -108,8 +114,8 @@ if (isset($_POST["submit"])) {
     if (empty($_POST["title"])) {
         $arrayErr["titleErr"] = "Title is required";
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
-        $arrayErr["titleErr"] = "Only letters and white space allowed";
+    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["title"])) {
+        $arrayErr["titleErr"] = "Only letters and white space allowed (title)";
     }
     else {
         $editedTitle = stringFilter($_POST['title']);
@@ -118,18 +124,18 @@ if (isset($_POST["submit"])) {
     if (empty($_POST["bio"])) {
         $arrayErr["bioErr"] = "Bio is required";
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
-        $arrayErr["bioErr"] = "Only letters and white space allowed";
+    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["bio"])) {
+        $arrayErr["bioErr"] = "Only letters and white space allowed (info)";
     }
     else {
         $editedInfo = stringFilter($_POST['bio']);
     }
     // $info = filter_var($_POST['bio'], FILTER_CALLBACK, array('options' => 'my_filter'));
     if (empty($_POST["local"])) {
-        $arrayErr["fnameErr"] = "Local is required";
+        $arrayErr["fnameErr"] = "Location is required";
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
-        $arrayErr["fnameErr"] = "Only letters and white space allowed";
+    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["local"])) {
+        $arrayErr["fnameErr"] = "Only letters and white space allowed (location)";
     }
     else {
         $editedLocation = stringFilter($_POST['local']);
@@ -139,11 +145,11 @@ if (isset($_POST["submit"])) {
     $host = $_SESSION['USER_ID'];
     
     $editedStarttime = $_POST['startdate'];
-    $EditedEndtime = $_POST['enddate'];
+    $editedEndtime = $_POST['enddate'];
     $editedCat = $_POST['category'];
 
     if (empty($_POST["ticketprice"])) {
-        $arrayErr["priceErr"] = "Price is required";
+        $editedTicketprice = "";
     } else if (!is_numeric($_POST["ticketprice"])) {
         $arrayErr["priceErr"] = "Price must be a number";
     } else {
