@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 06. Des, 2022 17:11 PM
+-- Generation Time: 06. Des, 2022 17:17 PM
 -- Tjener-versjon: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -159,7 +159,8 @@ INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `phone`, `pa
 (3, 'Ole', 'Lukkøye', 'ole@lukkøye.no', '12345678', '$2y$10$IjCWvA3vGyCunO80JdlpPuskslmToo0QX2BuWGK6fXmwL6Hp9Dn0i'),
 (9, 'Mikke', 'Mus', 'mikke@disney.no', '88888888', '$2y$10$hFmzAdXlQ1KvDmiRp9h1O.vTmwoSl6m9B2hOa6gC5Gs8VeKdjhcKK'),
 (10, 'Donald', 'Duck', 'donald@disney.com', '84488448', '$2y$10$v/NWytdsGZqL6hZoiIByYemVX5sRjT5Zlj38FBN8HezUrDhrC7ySm'),
-(11, 'Solan', 'Gundersen', 'solan@flaaklypa.no', '12343215', '$2y$10$IZzFTFQ1d20lDL3vSsSWheyAS8bveM1qhaYeT5M34MYC1mTtD7MaS');
+(11, 'Solan', 'Gundersen', 'solan@flaaklypa.no', '12343215', '$2y$10$IZzFTFQ1d20lDL3vSsSWheyAS8bveM1qhaYeT5M34MYC1mTtD7MaS'),
+(13, 'Test', 'User', 'test@user.com', '10101010', '$2y$10$E4.RUGD1WLB2BBf0hh9Lu.jR2cEF3aL6Zu3cfGszFvYzdYMddiPvi');
 
 --
 -- Indexes for dumped tables
@@ -240,7 +241,7 @@ ALTER TABLE `preferences`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Begrensninger for dumpede tabeller
