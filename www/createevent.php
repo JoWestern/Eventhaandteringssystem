@@ -14,7 +14,7 @@ if (isset($_POST["submit"])) {
         $titleErr = "Tittel er påkrevd";
         $arrayErr["titleErr"] = $titleErr;
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/',$_POST["title"])) {
+    } else if (!preg_match('/^[a-zA-Z0-9æÆøØåÅéÉ .,!?$%@#&+\-]+$/',$_POST["title"])) {
         $titleErr = "Kun bokstaver, tall og tegn";
         $arrayErr["titleErr"] = $titleErr;
     }
@@ -26,7 +26,7 @@ if (isset($_POST["submit"])) {
         $bioErr = "Beksrivelse er påkrevd";
         $arrayErr["bioErr"] = $bioErr;
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/',$_POST["bio"])) {
+    } else if (!preg_match('/^[a-zA-Z0-9æÆøØåÅéÉ .,!?$%@#&+\-]+$/',$_POST["bio"])) {
         $bioErr = "Kun bokstaver, tall og tegn";
         $arrayErr["bioErr"] = $bioErr;
     }
@@ -38,7 +38,7 @@ if (isset($_POST["submit"])) {
         $localErr = "Sted er påkrevd";
         $arrayErr["localErr"] = $localErr;
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/',$_POST["local"])) {
+    } else if (!preg_match('/^[a-zA-Z0-9æÆøØåÅéÉ .,!?$%@#&+\-]+$/',$_POST["local"])) {
         $localErr = "Kun bokstaver, tall og tegn";
         $arrayErr["localErr"] = $localErr;
     }
@@ -193,32 +193,31 @@ function displayImage($src) {
                     <label for="title">Tittel: *</label>
 
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off" required>
+                        <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off">
                         <?php 
                         if(isset($titleErr)) displayerror($titleErr); 
                         ?>
                     </div>
                     <label for="bio">Beskrivelse: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="bio" name="bio" autocomplete="off" required>
+                        <input class="form-control form-control-sm" type="text" id="bio" name="bio" autocomplete="off">
                         <?php 
                         if(isset($bioErr)) displayerror($bioErr); 
                         ?>
                     </div>
                     <label for="local">Sted: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="local" name="local" autocomplete="off" required>
+                        <input class="form-control form-control-sm" type="text" id="local" name="local" autocomplete="off">
                         <?php 
                         if(isset($localErr)) displayerror($localErr); 
                         ?>
                     </div>
                     <label for="startdate">Startdato: *</label>
-
-                        <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off" required>
+                    <div class="form-floating">
+                        <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off">
                         <?php 
                             if(isset($startdateErr)) displayerror($startdateErr); 
                             ?>
-
                     </div>
                     <label for="enddate">Sluttdato:</label>
                     <div class="form-floating">

@@ -29,7 +29,7 @@ if (isset($_POST["submit"])) {
         $titleErr = "Tittel er påkrevd";
         $arrayErr["titleErr"] = $titleErr;
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/', $_POST["title"])) {
+    } else if (!preg_match('/^[a-zA-Z0-9æÆøØåÅéÉ .,!?$%@#&+\-]+$/', $_POST["title"])) {
         $titleErr = "Kun bokstaver, tall og tegn";
         $arrayErr["titleErr"] = $titleErr;
     }
@@ -41,7 +41,7 @@ if (isset($_POST["submit"])) {
         $bioErr = "Beskrivelse er påkrevd";
         $arrayErr["bioErr"] = $bioErr;
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/',$_POST["bio"])) {
+    } else if (!preg_match('/^[a-zA-Z0-9æÆøØåÅéÉ .,!?$%@#&+\-]+$/',$_POST["bio"])) {
         $bioErr = "Kun bokstaver, tall og tegn";
         $arrayErr["bioErr"] = $bioErr;
     }
@@ -53,7 +53,7 @@ if (isset($_POST["submit"])) {
         $localErr = "Sted er påkrevd";
         $arrayErr["fnameErr"] = $localErr;
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/',$_POST["local"])) {
+    } else if (!preg_match('/^[a-zA-Z0-9æÆøØåÅéÉ .,!?$%@#&+\-]+$/',$_POST["local"])) {
         $localErr = "Kun bokstaver, tall og tegn";
         $arrayErr["fnameErr"] = $localErr;
     }
@@ -110,9 +110,10 @@ if (isset($_POST["submit"])) {
         if (
             $successEvent = $events->editEvent($_POST['eventID'], $editedTitle, $editedInfo, $editedLocation, $editedStarttime, $editedCat, $editedEndtime, $editedTicketprice, $editedWebsite, $img_url)
         ){
-            $success = "Event changed!";
+            $success = "Arrangement endret!";
             $communicator = new Communicator();
             $communicator->editedUpdate($eventID);
+
         } else {
             $unsuccess = "Det oppstod en feil";
         }
@@ -227,21 +228,23 @@ function displayImage($src) {
                     <label for="title">Tittel: *</label>
 
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off" value="<?php echo $title ?>" require_onced>
+
+                        <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off" value="<?php echo $title ?>">
                         <?php 
                         if(isset($titleErr)) displayerror($titleErr); 
                         ?>
                     </div>
                     <label for="bio">Beskrivelse: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="bio" name="bio" autocomplete="off" value="<?php echo $info ?>" require_onced>
+
+                        <input class="form-control form-control-sm" type="text" id="bio" name="bio" autocomplete="off" value="<?php echo $info ?>">
                         <?php 
                         if(isset($bioErr)) displayerror($bioErr); 
                         ?>
                     </div>
                     <label for="local">Sted: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="local" name="local" autocomplete="off" value="<?php echo $location ?>" require_onced>
+                        <input class="form-control form-control-sm" type="text" id="local" name="local" autocomplete="off" value="<?php echo $location ?>">
                         <?php 
                         if(isset($localErr)) displayerror($localErr); 
                         ?>
@@ -249,7 +252,7 @@ function displayImage($src) {
                     <label for="startdate">Startdato: *</label>
                     <div class="form-floating">
 
-                        <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off"  value="<?php echo $time ?>" require_onced>
+                        <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off"  value="<?php echo $time ?>">
                         <?php 
                         if(isset($startdateErr)) displayerror($startdateErr); 
                         ?>
