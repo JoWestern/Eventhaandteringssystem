@@ -22,7 +22,7 @@ if (isset($_POST["edit"])) {
         $fnameErr = "Brukernavn er påkrevd";
         $arrayErr["fnameErr"] = $fnameErr;
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["firstname"])) {
+    } else if (!preg_match("/^[a-zA-Z-' æÆøØåÅéÉ]*$/",$_POST["firstname"])) {
         $fnameErr = "Kun bokstaver og mellomrom er tillatt";
         $arrayErr = $fnameErr;
     }
@@ -33,7 +33,7 @@ if (isset($_POST["edit"])) {
     if (empty($_POST["lastname"])) {
         $editedLastname = "";
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match("/^[a-zA-Z-' ]*$/", $_POST["lastname"])) {
+    } else if (!preg_match("/^[a-zA-Z-' æÆøØåÅéÉ]*$/", $_POST["lastname"])) {
         $lnameErr = "Kun bokstaver og mellomrom er tillatt";
         $arrayErr = $lnameErr;
     }

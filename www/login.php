@@ -47,7 +47,14 @@ require __DIR__."/assets/inc/displayError.php";
             }
         } else {
             $users = new User();
-            $validateUser = $users->validateUser($username, $password);
+            if (
+                $validateUser = $users->validateUser($username, $password)
+            ) {
+                header("Location: index.php");
+                exit();
+            } else {
+                $loginErr = "Feil brukernavn eller passord";
+            }
         }
     }
 
@@ -67,6 +74,9 @@ function redirect($url) {
                 <div class="main">
                     <form method="POST" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> autocomplete="off">  
                         <h1 class="h3 mb-3 fw-normal">Logg inn</h1>
+                        <?php 
+                            if(isset($loginErr)) displayerror($loginErr); 
+                        ?>
                         <div class="form-floating">
                             <input type="email" id="username" name="username" placeholder="E-post" autocomplete="off">
                             <?php 
@@ -79,7 +89,6 @@ function redirect($url) {
                             if(isset($passErr)) displayerror($passErr); 
                             ?>
                         </div>
-
                         <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="login" value="Logg inn" autocomplete="off" />
                         <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="register" value="Registrer" autocomplete="off" />
                     </form>

@@ -28,7 +28,7 @@ if (isset($_POST["submit"])) {
         $titleErr = "Tittel er påkrevd";
         $arrayErr["titleErr"] = $titleErr;
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/', $_POST["title"])) {
+    } else if (!preg_match('/^[a-zA-Z0-9æÆøØåÅéÉ .,!?$%@#&+\-]+$/', $_POST["title"])) {
         $titleErr = "Kun bokstaver, tall og tegn";
         $arrayErr["titleErr"] = $titleErr;
     }
@@ -40,7 +40,7 @@ if (isset($_POST["submit"])) {
         $bioErr = "Beskrivelse er påkrevd";
         $arrayErr["bioErr"] = $bioErr;
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/',$_POST["bio"])) {
+    } else if (!preg_match('/^[a-zA-Z0-9æÆøØåÅéÉ .,!?$%@#&+\-]+$/',$_POST["bio"])) {
         $bioErr = "Kun bokstaver, tall og tegn";
         $arrayErr["bioErr"] = $bioErr;
     }
@@ -52,7 +52,7 @@ if (isset($_POST["submit"])) {
         $localErr = "Sted er påkrevd";
         $arrayErr["fnameErr"] = $localErr;
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/',$_POST["local"])) {
+    } else if (!preg_match('/^[a-zA-Z0-9æÆøØåÅéÉ .,!?$%@#&+\-]+$/',$_POST["local"])) {
         $localErr = "Kun bokstaver, tall og tegn";
         $arrayErr["fnameErr"] = $localErr;
     }
@@ -109,7 +109,7 @@ if (isset($_POST["submit"])) {
         if (
             $successEvent = $events->editEvent($_POST['eventID'], $editedTitle, $editedInfo, $editedLocation, $editedStarttime, $editedCat, $editedEndtime, $editedTicketprice, $editedWebsite, $img_url)
         ){
-            $success = "Event changed!";
+            $success = "Arrangement endret!";
         } else {
             $unsuccess = "Det oppstod en feil";
         }
