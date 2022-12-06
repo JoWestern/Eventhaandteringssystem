@@ -13,7 +13,7 @@ function sendMail($address, $title, $content){
 
     try {
     //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+    $mail->SMTPDebug = 0;                      //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
@@ -33,7 +33,7 @@ function sendMail($address, $title, $content){
     $mail->AltBody = $content;
 
     $mail->send();
-    echo 'Melding sendt';
+    // echo 'Melding sendt';
 } catch (Exception $e) {
     echo "Melding kunne ikke bli sendt. Mailer Error: {$mail->ErrorInfo}";
 }
