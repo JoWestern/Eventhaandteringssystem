@@ -102,7 +102,7 @@ if (isset($_POST["submit"])) {
     }
 
     if (isset($_FILES['imgFile'])) {
-        $img_url = checkFile();
+        $img_url = checkFile($img);
     }
 
     if ((empty($arrayErr))) {
@@ -123,7 +123,7 @@ if (isset($_POST["submit"])) {
 }
 
 //runs when form has been submitted
-function checkFile() {
+function checkFile($img) {
     // Define array for messages 
     $messages = array();
     $semiPath = "assets/img/";
@@ -185,8 +185,13 @@ function checkFile() {
         }
     } 
     else {
+        if($img !== null){
+            return $img;
+        }
+        else{
         $messages['error'][] = "Ingen fil er lastet opp";
         return $filepathStock;
+        }
     }
 }
 
