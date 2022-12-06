@@ -19,6 +19,7 @@ $booking = new Booking();
 $dateFormat = new Display();
 $datetimeStart = new DateTimeImmutable($thisEvent->time);
 $formattedStart = $dateFormat->formatDatetime($datetimeStart);
+$formattedEnd = "";
 
 if($thisEvent->endtime == null) $dateTimeEnd = "";
 else {
@@ -53,6 +54,10 @@ echo
                 "<form method='post' action='editevent.php'>
                 <input type='hidden' name='eventID' value='$eventID'>
                     <input type='submit' value='Rediger' />
+                </form>
+                <form method='post' action='pdfcreation.php'>
+                <input type='hidden' name='eventID' value='$eventID'>
+                    <input type='submit' value='Få gjesteliste' />
                 </form>
                 <form method='post'>
                 <input type='hidden' name='eventID' value='$eventID'>
