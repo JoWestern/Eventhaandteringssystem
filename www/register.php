@@ -99,9 +99,10 @@ if (isset($_POST["login"])) {
         <div class="container login mt-5" style="width: fit-content">
             <form method="POST" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> autocomplete="off">
                 <h1 class="h3 mb-3 fw-normal">Registrer bruker</h1>
-                <label for="firstname">Fornavn:</label>
+                <p>Felt merket med * er obligatoriske</p>
+                <label for="firstname">Fornavn/organisasjonsnavn: *</label>
                 <div class="form-floating">
-                    <input class="form-control" type="text" id="firstname" name="firstname" autocomplete="off">
+                    <input class="form-control" type="text" id="firstname" name="firstname" autocomplete="off" required>
                     <?php 
                     if(isset($fnameErr)) displayerror($fnameErr); 
                     ?>
@@ -113,27 +114,27 @@ if (isset($_POST["login"])) {
                     if(isset($lnameErr)) displayerror($lnameErr); 
                     ?>
                 </div>
-                <label for="email">E-post:</label>
+                <label for="email">E-post: *</label>
                 <div class="form-floating">
-                    <input class="form-control" type="email" id="email" name="email" autocomplete="off">
+                    <input class="form-control" type="email" id="email" name="email" autocomplete="off" required>
                     <?php 
                     if(isset($emailErr)) displayerror($emailErr); 
                     ?>
                 </div>
-                <label for="password">Passord (8-12 tegn, minst ett tall)</label>
+                <label for="password">Passord (8-12 tegn, minst ett tall): *</label>
                 <div class="form-floating">
-                    <input class="form-control" type="password" id="password" name="password" autocomplete="off">
+                    <input class="form-control" type="password" id="password" name="password" autocomplete="off" required>
                     <?php 
                     if(isset($passErr)) displayerror($passErr); 
                     ?>
                 </div>
-                <label for="password">Bekreft passord:</label>
+                <label for="password">Bekreft passord: *</label>
                 <div class="form-floating">
-                    <input class="form-control" type="password" id="password" name="passwordconfirm" autocomplete="off">
+                    <input class="form-control" type="password" id="password" name="passwordconfirm" autocomplete="off" required>
                 </div>
-                <label for="phone">Telefonnummer:</label>
+                <label for="phone">Telefonnummer: *</label>
                 <div class="form-floating">
-                    <input class="form-control" type="number" id="phone" name="phone" autocomplete="off">
+                    <input class="form-control" type="number" id="phone" name="phone" autocomplete="off" required>
                     <?php 
                     if(isset($phoneErr)) displayerror($phoneErr); 
                     ?>

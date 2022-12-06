@@ -181,6 +181,7 @@ function displayImage($src) {
         </div>
             <form method="POST" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> autocomplete="off" enctype="multipart/form-data">
                 <h1 class="h3 mb-3 fw-normal">Opprett arrangement</h1>
+
                 <?php 
                  if (isset($success)) {
                     echo "<small><p style='color: green;'><b>".$success."</b></p></small>";
@@ -188,33 +189,36 @@ function displayImage($src) {
                     echo "<small><p style='color: red;'><b>".$unsuccess."</b></p></small>";
                 }
                 ?>
-                    <label for="title">Tittel:</label>
+                    <p>Felt merket med * er obligatoriske</p>
+                    <label for="title">Tittel: *</label>
+
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off">
+                        <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off" required>
                         <?php 
                         if(isset($titleErr)) displayerror($titleErr); 
                         ?>
                     </div>
-                    <label for="bio">Beskrivelse:</label>
+                    <label for="bio">Beskrivelse: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="bio" name="bio" autocomplete="off">
+                        <input class="form-control form-control-sm" type="text" id="bio" name="bio" autocomplete="off" required>
                         <?php 
                         if(isset($bioErr)) displayerror($bioErr); 
                         ?>
                     </div>
-                    <label for="local">Lokasjon:</label>
+                    <label for="local">Sted: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="local" name="local" autocomplete="off">
+                        <input class="form-control form-control-sm" type="text" id="local" name="local" autocomplete="off" required>
                         <?php 
                         if(isset($localErr)) displayerror($localErr); 
                         ?>
                     </div>
-                    <label for="startdate">Startdato:</label>
-                    <div class="form-floating">
-                        <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off">
+                    <label for="startdate">Startdato: *</label>
+
+                        <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off" required>
                         <?php 
                             if(isset($startdateErr)) displayerror($startdateErr); 
                             ?>
+
                     </div>
                     <label for="enddate">Sluttdato:</label>
                     <div class="form-floating">
@@ -232,7 +236,7 @@ function displayImage($src) {
                             ?>
                         </div>
                     </div>
-                    <label class="mt-1" for="cat">Kategori:</label>
+                    <label class="mt-1" for="cat">Kategori: *</label>
                     <div class="form-floating">
                         <select class="form-control form-control-sm" name="category">
                             <?php
@@ -244,7 +248,7 @@ function displayImage($src) {
                             ?>
                         </select>
                     </div>
-                    <label for="website">Link til nettside:</label>
+                    <label for="website">Lenke til nettside:</label>
                     <div class="form-floating">
                         <input class="form-control form-control-sm" type="text" id="website" name="website" autocomplete="off" placeholder="https://www.nettside.no">
                             <?php 

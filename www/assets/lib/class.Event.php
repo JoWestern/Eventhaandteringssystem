@@ -150,8 +150,25 @@ class Event{
         }
         catch (Exception $e){
             echo "Noe gikk galt, eventet ble ikke slettet";
-}
+        }
+    }
 
+    function searchEvents($query){
+        $dbConn = new DbConn();
+        $conn = $dbConn->connect();
+
+        $sql = "SELECT event_id, title, info, location, time, img_path 
+        FROM eventhandling.events
+        INNER JOIN eventhandling.users ON users.user_id = events.host
+        WHERE LOWER(title) LIKE LOWER('%$query%')
+            OR LOWER(info) LIKE LOWER('%$query%')
+            OR LOWER(location) LIKE LOWER('%$query%')
+        ORDER BY time ASC;";
+
+        $result = $conn->query($sql);
+
+        return $result;
+        $conn->close();
     }
 }
 ?>
