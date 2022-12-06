@@ -1,9 +1,9 @@
 <?php 
-require dirname(__DIR__)."/www/assets/inc/header.php";
-require dirname(__DIR__)."/www/assets/lib/class.Event.php";
-require dirname(__DIR__)."/www/assets/lib/class.Booking.php";
-require dirname(__DIR__)."/www/assets/lib/class.Display.php";
-require __DIR__."/assets/inc/authenticate.php";
+require_once dirname(__DIR__)."/www/assets/inc/header.php";
+require_once dirname(__DIR__)."/www/assets/lib/class.Event.php";
+require_once dirname(__DIR__)."/www/assets/lib/class.Booking.php";
+require_once dirname(__DIR__)."/www/assets/lib/class.Display.php";
+require_once __DIR__."/assets/inc/authenticate.php";
 ?>
 
 <?php

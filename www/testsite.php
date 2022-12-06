@@ -1,6 +1,6 @@
 <?php
 
-require_once "./assets/inc/PHPMailer.php";
+require_once "./assets/lib/PHPMailer.php";
 require_once "./assets/lib/class.Booking.php";
 require_once "./assets/lib/class.Event.php";
 

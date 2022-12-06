@@ -1,10 +1,11 @@
 <?php
-require dirname(__DIR__) . "/www/assets/inc/header.php";
-require dirname(__DIR__) . "/www/assets/lib/class.Event.php";
-require dirname(__DIR__) . "/www/assets/lib/class.Category.php";
-require __DIR__."/assets/inc/authenticate.php";
-require __DIR__."/assets/inc/stringFilter.php";
-require __DIR__."/assets/inc/displayError.php";
+require_once dirname(__DIR__) . "/www/assets/inc/header.php";
+require_once dirname(__DIR__) . "/www/assets/lib/class.Event.php";
+require_once dirname(__DIR__) . "/www/assets/lib/class.Category.php";
+require_once __DIR__."/assets/inc/authenticate.php";
+require_once __DIR__."/assets/inc/stringFilter.php";
+require_once __DIR__."/assets/inc/displayError.php";
+require_once __DIR__."/assets/lib/class.Communicator.php";
 
 $event = new Event();
 $result = $event->singleEvent($_POST['eventID']);
@@ -110,6 +111,8 @@ if (isset($_POST["submit"])) {
             $successEvent = $events->editEvent($_POST['eventID'], $editedTitle, $editedInfo, $editedLocation, $editedStarttime, $editedCat, $editedEndtime, $editedTicketprice, $editedWebsite, $img_url)
         ){
             $success = "Event changed!";
+            $communicator = new Communicator();
+            $communicator->editedUpdate($eventID);
         } else {
             $unsuccess = "Det oppstod en feil";
         }
@@ -224,21 +227,21 @@ function displayImage($src) {
                     <label for="title">Tittel: *</label>
 
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off" value="<?php echo $title ?>" required>
+                        <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off" value="<?php echo $title ?>" require_onced>
                         <?php 
                         if(isset($titleErr)) displayerror($titleErr); 
                         ?>
                     </div>
                     <label for="bio">Beskrivelse: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="bio" name="bio" autocomplete="off" value="<?php echo $info ?>" required>
+                        <input class="form-control form-control-sm" type="text" id="bio" name="bio" autocomplete="off" value="<?php echo $info ?>" require_onced>
                         <?php 
                         if(isset($bioErr)) displayerror($bioErr); 
                         ?>
                     </div>
                     <label for="local">Sted: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="local" name="local" autocomplete="off" value="<?php echo $location ?>" required>
+                        <input class="form-control form-control-sm" type="text" id="local" name="local" autocomplete="off" value="<?php echo $location ?>" require_onced>
                         <?php 
                         if(isset($localErr)) displayerror($localErr); 
                         ?>
@@ -246,7 +249,7 @@ function displayImage($src) {
                     <label for="startdate">Startdato: *</label>
                     <div class="form-floating">
 
-                        <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off"  value="<?php echo $time ?>" required>
+                        <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off"  value="<?php echo $time ?>" require_onced>
                         <?php 
                         if(isset($startdateErr)) displayerror($startdateErr); 
                         ?>
