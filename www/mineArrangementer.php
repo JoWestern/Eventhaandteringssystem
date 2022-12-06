@@ -2,7 +2,7 @@
 require __DIR__."/assets/inc/header.php";
 require __DIR__."/assets/lib/class.Display.php";
 require __DIR__."/assets/lib/class.Booking.php";
-require __DIR__."/assets/lib/class.Event.php";
+require_once __DIR__."/assets/lib/class.Event.php";
 require __DIR__."/assets/inc/authenticate.php";
 ?>
 

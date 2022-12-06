@@ -1,5 +1,5 @@
 <?php
-require __DIR__."/class.DbConn.php";
+require_once __DIR__."/class.DbConn.php";
 
 class User{
 
@@ -67,7 +67,9 @@ function createUser($firstname, $lastname, $email, $phone, $password)
             WHERE user_id = $userID;";
 
         $result = $conn->query($sql);
+        $conn->close();
         return $result;
+        
     }
 
     function editUserInfo($userID, $firstname, $lastname, $email, $phone){
