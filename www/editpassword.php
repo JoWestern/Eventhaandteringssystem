@@ -39,7 +39,9 @@ if (isset($_POST["edit"])) {
     
     if ((empty($arrayErr))) {
         $user->editUserPassword($_SESSION['USER_ID'], password_hash($_POST['newpassword'], PASSWORD_DEFAULT));
-        echo "Passord endret";
+        $success = "Passord endret";
+    } else {
+        $unsuccess = "Det oppstod en feil";
     }
 }
 
@@ -53,6 +55,13 @@ if (isset($_POST["edit"])) {
         <div class="container login mt-5" style="width: fit-content">
             <form method="POST" action="" autocomplete="off">
                 <h1 class="h3 mb-3 fw-normal">Endre passord</h1>
+                <?php 
+                 if (isset($success)) {
+                    echo "<small><p style='color: green;'><b>".$success."</b></p></small>";
+                } else if (isset($unsuccess)) {
+                    echo "<small><p style='color: red;'><b>".$unsuccess."</b></p></small>";
+                }
+                ?>
                 <label for="oldpassword">Gammelt passord:</label>
                 <div class="form-floating">
                     <input type="password" name="oldpassword" autocomplete="off">
