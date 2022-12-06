@@ -19,8 +19,8 @@ function sendMail($address, $title, $content){
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
     $mail->Username   = 'uiaphp2022@gmail.com';                     //SMTP username
     $mail->Password   = 'rukvqxvnfuqhynoi';                               //SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->SMTPSecure = "tls";            //Enable implicit TLS encryption
+    $mail->Port       = "587";                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
     $mail->setFrom('uiaphp2022@gmail.com', 'Arr!');
