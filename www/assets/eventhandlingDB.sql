@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 04. Des, 2022 16:18 PM
+-- Generation Time: 06. Des, 2022 17:17 PM
 -- Tjener-versjon: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -97,11 +97,11 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`event_id`, `title`, `info`, `host`, `location`, `time`, `category_id`, `endtime`, `ticketprice`, `website`, `img_path`) VALUES
-(1, 'Skogsmarathon', 'Kom og løp 42 km i skauen.', 1, 'Bymarka, start og mål i Ravnedalen', '2023-04-01 12:00:00', 1, NULL, NULL, NULL, NULL),
-(2, 'Filmfestival', 'Filmfestival hos SørKino, gratis inngang for alle hele dagen!', 2, 'Sør Kino, Kristiansand', '2023-01-07 14:00:00', 2, '2023-01-08 23:00:00', '0', 'https://www.nfkino.no/kino/kristiansand', NULL),
-(3, 'Gokart', 'Gokart', 1, 'X3M Sørlandsparken', '2023-01-21 18:30:00', 5, NULL, '1000', 'https://x3m.no', NULL),
-(4, 'Gratiskonsert', 'Gratis konsert med flotte musikere', 1, 'Tresse, Kristiansand', '2023-02-06 20:00:00', 4, NULL, NULL, NULL, NULL),
-(5, 'Flåklypa Grand Prix teaterforestilling', 'Teaterforestilling av klassikeren Flåklypa Grand Prix, kom og se!', 2, 'Kilden, Kristiansand', '2023-02-06 19:00:00', 3, NULL, NULL, NULL, NULL),
+(1, 'Skogsmarathon', 'Kom og løp 42 km i skauen.', 1, 'Bymarka, start og mål i Ravnedalen', '2023-04-01 12:00:00', 1, NULL, NULL, NULL, 'assets/img/event1.jpg'),
+(2, 'Filmfestival', 'Filmfestival hos SørKino, gratis inngang for alle hele dagen!', 2, 'Sør Kino, Kristiansand', '2023-01-07 14:00:00', 2, '2023-01-08 23:00:00', '0', 'https://www.nfkino.no/kino/kristiansand', 'assets/img/event2.jpg'),
+(3, 'Gokart', 'Le Mans', 1, 'X3M', '2023-01-21 18:30:00', 1, NULL, '5000', 'https://x3m.no', 'assets/img/315ed.jpg'),
+(4, 'Gratiskonsert', 'Gratis konsert med flotte musikere', 1, 'Tresse, Kristiansand', '2023-02-06 20:00:00', 4, NULL, '', '', 'assets/img/27d59.jpg'),
+(5, 'Flåklypa Grand Prix teaterforestilling', 'Teaterforestilling av klassikeren Flåklypa Grand Prix, kom og se!', 2, 'Kilden, Kristiansand', '2023-02-06 19:00:00', 3, NULL, NULL, NULL, 'assets/img/event5.jpg'),
 (6, 'Ballett', 'Kom og se ballettdansere danse ballett. Disse folkene er bedre enn deg på balanse, rytme, kroppsbeherskelse, utholdenhet, osv osv.\r\n\r\nSvanesjøen blir fremført.', 2, 'Kilden', '2023-04-01 19:00:00', 9, '2023-04-01 21:00:00', '350', NULL, NULL),
 (7, 'Gitarkurs', 'Kom og lær å spille gitar. Du vil adri bli Jimi Hendrix, men du kan alltids prøve og derpå få drømmene dine knust.', 1, 'Kvadraturen Videregående Skole', '2023-02-09 15:00:00', 4, NULL, '500', NULL, NULL),
 (8, 'Romjulsgløggfest', 'Her skal det drekkas gløgg guttær og jæntær! Ta med ditt feteste krus og ubegrensede mengder pepperkaker.', 2, 'Wergelandsparken/Torvet', '2022-12-23 19:00:00', 6, NULL, '0', NULL, NULL),
@@ -154,11 +154,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `phone`, `password`) VALUES
-(1, 'Erlend', 'Lotsberg', 'erlend@mail.no', '81509000', '$2y$10$sSCdVI5ZTVH.9D51dJBsru6dK7loPcfVz6BfZLqqqYFRIHk.3RZlm'),
+(1, 'Erlend', 'Lotsberg', 'erlend@mail.no', '81509000', '$2y$10$p9e5MMy7W.Bk1wsw42u7yuSCwJGOba71vpr2O0NUdkY0oYin4jdS2'),
 (2, 'Joachim', 'Western', 'joachim@wildwildwest.com', '22225555', '$2y$10$xeyDCV5AgA.fn1u.HrBcaO.s9WqG9v0FjR01n7Z58cOEBBY.wqj5i'),
 (3, 'Ole', 'Lukkøye', 'ole@lukkøye.no', '12345678', '$2y$10$IjCWvA3vGyCunO80JdlpPuskslmToo0QX2BuWGK6fXmwL6Hp9Dn0i'),
 (9, 'Mikke', 'Mus', 'mikke@disney.no', '88888888', '$2y$10$hFmzAdXlQ1KvDmiRp9h1O.vTmwoSl6m9B2hOa6gC5Gs8VeKdjhcKK'),
-(10, 'Donald', 'Duck', 'donald@disney.com', '84488448', '$2y$10$v/NWytdsGZqL6hZoiIByYemVX5sRjT5Zlj38FBN8HezUrDhrC7ySm');
+(10, 'Donald', 'Duck', 'donald@disney.com', '84488448', '$2y$10$v/NWytdsGZqL6hZoiIByYemVX5sRjT5Zlj38FBN8HezUrDhrC7ySm'),
+(11, 'Solan', 'Gundersen', 'solan@flaaklypa.no', '12343215', '$2y$10$IZzFTFQ1d20lDL3vSsSWheyAS8bveM1qhaYeT5M34MYC1mTtD7MaS'),
+(13, 'Test', 'User', 'test@user.com', '10101010', '$2y$10$E4.RUGD1WLB2BBf0hh9Lu.jR2cEF3aL6Zu3cfGszFvYzdYMddiPvi');
 
 --
 -- Indexes for dumped tables
@@ -215,7 +217,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `booking_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `booking_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -227,7 +229,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `event_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `event_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `preferences`
@@ -239,7 +241,7 @@ ALTER TABLE `preferences`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Begrensninger for dumpede tabeller
