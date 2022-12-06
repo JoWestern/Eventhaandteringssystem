@@ -60,7 +60,14 @@ class Event{
         );
 
         $stmt->bind_param('ssssssssss', $title, $info, $host, $location, $time, $category_id, $endtime, $ticketprice, $website, $img_url);
-        $stmt->execute();
+        try{
+            $stmt->execute();
+            return true;
+        }
+        catch (Exception $e){
+            echo "Noe gikk galt, endringen ble ikke lagret";
+            return false;
+        }
 
         $stmt->close();
         $conn->close();
@@ -118,9 +125,11 @@ class Event{
         
         try{
             $stmt->execute();
+            return true;
         }
         catch (Exception $e){
             echo "Noe gikk galt, endringen ble ikke lagret";
+            return false;
         }
 
         $stmt->close();
