@@ -87,5 +87,21 @@ class Booking{
 
         $conn->close();
     }
+
+    function guestList($eventID){
+        $dbConn = new DbConn();
+        $conn = $dbConn->connect();
+        
+        $sql = "SELECT first_name, last_name, email, phone FROM eventhandling.bookings
+        INNER JOIN users on users.user_id = bookings.user_id
+        WHERE event_id = $eventID;";
+
+        $result = $conn->query($sql);
+
+        return $result;
+
+        $conn->close();
+
+    }
 }
 ?>
