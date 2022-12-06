@@ -71,7 +71,7 @@ if (isset($_POST["submit"])) {
     }
 
     if ($_POST['enddate'] == null){
-        $endtime = null;
+        $editedEndtime = null;
     } else {
         $editedEndtime = $_POST['enddate'];
     }
