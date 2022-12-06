@@ -19,9 +19,11 @@ function createUser($firstname, $lastname, $email, $phone, $password)
         
         try{
         $stmt->execute();
+        return true;
         }
         catch (Exception $e){
-            echo "Det er allerede registrert en bruker med oppgitt telefonnummer eller e-post";
+            return false;
+            // echo "Det er allerede registrert en bruker med oppgitt telefonnummer eller e-post";
         }
 
         $stmt->close();
@@ -43,18 +45,16 @@ function createUser($firstname, $lastname, $email, $phone, $password)
         $user = $result->fetch_assoc();
 
         if(!$user || !password_verify($password, $user["password"])){
-            echo "<br>Brukernavn eller passord er feil";
-            die();
+            return false;
         } else {
             session_start();
             $_SESSION["USER_ID"] = $user["user_id"];
             $_SESSION["USERNAME"] = $user["email"];
             $_SESSION["FIRSTNAME"]= $user["first_name"];
             $_SESSION["LOGGED_IN"] = true;
-            header("Location: index.php");
-            exit();
+            return true;
         }
-
+        $stmt->close();
         $conn->close();
     }
 

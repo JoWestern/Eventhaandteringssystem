@@ -88,7 +88,7 @@ if (isset($_POST["edit"])) {
                 <p>Felt merket med * er obligatoriske</p>
                 <label for="firstname">Fornavn/organisasjonsnavn: *</label>
                 <div class="form-floating">
-                    <input type="text" id="firstname" name="firstname" autocomplete="off" value="<?php echo $firstname?> required">
+                    <input type="text" id="firstname" name="firstname" autocomplete="off" value=<?php echo $firstname?>>
                     <?php 
                     if(isset($fnameErr)) displayerror($fnameErr); 
                     ?>
@@ -102,14 +102,14 @@ if (isset($_POST["edit"])) {
                 </div>
                 <label for="email">E-post: *</label>
                 <div class="form-floating">
-                    <input type="email" id="email" name="email" autocomplete="off" value= <?php echo $email ?> required>
+                    <input type="email" id="email" name="email" autocomplete="off" value= <?php echo $email ?>>
                     <?php 
                     if(isset($emailErr)) displayerror($emailErr); 
                     ?>
                 </div>
                 <label for="phone">Telefonnummer: *</label>
                 <div class="form-floating">
-                    <input type="number" id="phone" name="phone" autocomplete="off" value=<?php echo $phone ?> required>
+                    <input type="number" id="phone" name="phone" autocomplete="off" value=<?php echo $phone ?>>
                     <?php 
                     if(isset($phoneErr)) displayerror($phoneErr); 
                     ?>

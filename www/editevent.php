@@ -224,21 +224,21 @@ function displayImage($src) {
                     <label for="title">Tittel: *</label>
 
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off" value="<?php echo $title ?>" required>
+                        <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off" value="<?php echo $title ?>">
                         <?php 
                         if(isset($titleErr)) displayerror($titleErr); 
                         ?>
                     </div>
                     <label for="bio">Beskrivelse: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="bio" name="bio" autocomplete="off" value="<?php echo $info ?>" required>
+                        <input class="form-control form-control-sm" type="text" id="bio" name="bio" autocomplete="off" value="<?php echo $info ?>">
                         <?php 
                         if(isset($bioErr)) displayerror($bioErr); 
                         ?>
                     </div>
                     <label for="local">Sted: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="local" name="local" autocomplete="off" value="<?php echo $location ?>" required>
+                        <input class="form-control form-control-sm" type="text" id="local" name="local" autocomplete="off" value="<?php echo $location ?>">
                         <?php 
                         if(isset($localErr)) displayerror($localErr); 
                         ?>
@@ -246,7 +246,7 @@ function displayImage($src) {
                     <label for="startdate">Startdato: *</label>
                     <div class="form-floating">
 
-                        <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off"  value="<?php echo $time ?>" required>
+                        <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off"  value="<?php echo $time ?>">
                         <?php 
                         if(isset($startdateErr)) displayerror($startdateErr); 
                         ?>
