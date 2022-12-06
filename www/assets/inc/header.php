@@ -34,8 +34,8 @@ session_start()
       }
       ?>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Søk" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0" method="GET" action="results.php">
+      <input class="form-control mr-sm-2" name="query" type="search" placeholder="Søk" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Søk</button>
     </form>
   </div>

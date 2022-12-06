@@ -1,3 +1,4 @@
 <?php
-session_start();
-print_r($_POST);
+
+
+echo $_GET['query'];

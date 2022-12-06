@@ -85,9 +85,10 @@ if (isset($_POST["edit"])) {
         <div class="container login mt-5" style="width: fit-content">
             <form method="POST" action="" autocomplete="off">
                 <h1 class="h3 mb-3 fw-normal">Endre bruker</h1>
-                <label for="firstname">Fornavn:</label>
+                <p>Felt merket med * er obligatoriske</p>
+                <label for="firstname">Fornavn/organisasjonsnavn: *</label>
                 <div class="form-floating">
-                    <input type="text" id="firstname" name="firstname" autocomplete="off" value="<?php echo $firstname?>">
+                    <input type="text" id="firstname" name="firstname" autocomplete="off" value="<?php echo $firstname?> required">
                     <?php 
                     if(isset($fnameErr)) displayerror($fnameErr); 
                     ?>
@@ -99,16 +100,16 @@ if (isset($_POST["edit"])) {
                     if(isset($lnameErr)) displayerror($lnameErr); 
                     ?>
                 </div>
-                <label for="email">E-post:</label>
+                <label for="email">E-post: *</label>
                 <div class="form-floating">
-                    <input type="email" id="email" name="email" autocomplete="off" value= <?php echo $email ?>>
+                    <input type="email" id="email" name="email" autocomplete="off" value= <?php echo $email ?> required>
                     <?php 
                     if(isset($emailErr)) displayerror($emailErr); 
                     ?>
                 </div>
-                <label for="phone">Telefonnummer:</label>
+                <label for="phone">Telefonnummer: *</label>
                 <div class="form-floating">
-                    <input type="number" id="phone" name="phone" autocomplete="off" value=<?php echo $phone ?>>
+                    <input type="number" id="phone" name="phone" autocomplete="off" value=<?php echo $phone ?> required>
                     <?php 
                     if(isset($phoneErr)) displayerror($phoneErr); 
                     ?>

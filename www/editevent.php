@@ -195,30 +195,31 @@ function displayImage($src) {
         </div>
             <form method="POST" action='' autocomplete="off" enctype="multipart/form-data">
                 <h1 class="h3 mb-3 fw-normal">Endre arrangement</h1>
-                    <label for="title">Tittel:</label>
+                <p>Felt merket med * er obligatoriske</p>
+                    <label for="title">Tittel: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off" value="<?php echo $title ?>">
+                        <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off" value="<?php echo $title ?>" required>
                         <?php 
                         if(isset($titleErr)) displayerror($titleErr); 
                         ?>
                     </div>
-                    <label for="bio">Beskrivelse:</label>
+                    <label for="bio">Beskrivelse: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="bio" name="bio" autocomplete="off" value="<?php echo $info ?>">
+                        <input class="form-control form-control-sm" type="text" id="bio" name="bio" autocomplete="off" value="<?php echo $info ?>" required>
                         <?php 
                         if(isset($bioErr)) displayerror($bioErr); 
                         ?>
                     </div>
-                    <label for="local">Sted:</label>
+                    <label for="local">Sted: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="local" name="local" autocomplete="off" value="<?php echo $location ?>">
+                        <input class="form-control form-control-sm" type="text" id="local" name="local" autocomplete="off" value="<?php echo $location ?>" required>
                         <?php 
                         if(isset($localErr)) displayerror($localErr); 
                         ?>
                     </div>
-                    <label for="startdate">Startdato:</label>
+                    <label for="startdate">Startdato: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off"  value="<?php echo $time ?>">
+                        <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off"  value="<?php echo $time ?>" required>
                     </div>
                     <label for="enddate">Sluttdato:</label>
                     <div class="form-floating">
@@ -236,7 +237,7 @@ function displayImage($src) {
                             ?>
                         </div>
                     </div>
-                    <label class="mt-1" for="cat">Kategori:</label>
+                    <label class="mt-1" for="cat">Kategori: *</label>
                     <div class="form-floating">
                         <select class="form-control form-control-sm" name="category">
                             <?php
@@ -248,7 +249,7 @@ function displayImage($src) {
                             ?>
                         </select>
                     </div>
-                    <label for="website">Link til nettside:</label>
+                    <label for="website">Lenke til nettside:</label>
                     <div class="form-floating">
                         <input class="form-control form-control-sm" type="text" id="website" name="website" autocomplete="off" value="<?php echo $website ?>">
                         <?php 
