@@ -193,28 +193,28 @@ function displayImage($src) {
                     <label for="title">Tittel: *</label>
 
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off" required>
+                        <input class="form-control form-control-sm" type="text" id="title" name="title" autocomplete="off">
                         <?php 
                         if(isset($titleErr)) displayerror($titleErr); 
                         ?>
                     </div>
                     <label for="bio">Beskrivelse: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="bio" name="bio" autocomplete="off" required>
+                        <input class="form-control form-control-sm" type="text" id="bio" name="bio" autocomplete="off">
                         <?php 
                         if(isset($bioErr)) displayerror($bioErr); 
                         ?>
                     </div>
                     <label for="local">Sted: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="text" id="local" name="local" autocomplete="off" required>
+                        <input class="form-control form-control-sm" type="text" id="local" name="local" autocomplete="off">
                         <?php 
                         if(isset($localErr)) displayerror($localErr); 
                         ?>
                     </div>
                     <label for="startdate">Startdato: *</label>
                     <div class="form-floating">
-                        <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off" required>
+                        <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off">
                         <?php 
                             if(isset($startdateErr)) displayerror($startdateErr); 
                             ?>
