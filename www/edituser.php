@@ -64,7 +64,10 @@ if (isset($_POST["edit"])) {
         $phoneErr = "Mobilnummer må være tall";
         $arrayErr["phoneErr"] = $phoneErr;
     }  
-    else {
+    else if (strlen($_POST['phone']) !== 8) {
+        $phoneErr = "Mobilnummer må være 8 tall";
+        $arrayErr["phoneErr"] = $phoneErr;
+    }else {
         $editedPhone = $_POST['phone'];
     }
 
