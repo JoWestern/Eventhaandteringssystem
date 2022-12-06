@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__."/class.DbConn.php";
+require_once "../inc/PHPMailer.php";
 
 class Event{
     function getEvents($number, $comingEvents){
@@ -134,6 +135,9 @@ class Event{
 
         $stmt->close();
         $conn->close();
+        
+        $communicator = new Communicator();
+        $communicator->editedUpdate($eventID);
     }
     
     function deleteEvent($eventID){
