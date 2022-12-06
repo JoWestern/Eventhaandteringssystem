@@ -14,7 +14,7 @@ if (isset($_POST["submit"])) {
         $titleErr = "Tittel er påkrevd";
         $arrayErr["titleErr"] = $titleErr;
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/',$_POST["title"])) {
+    } else if (!preg_match('/^[a-zA-Z0-9æÆøØåÅéÉ .,!?$%@#&+\-]+$/',$_POST["title"])) {
         $titleErr = "Kun bokstaver, tall og tegn";
         $arrayErr["titleErr"] = $titleErr;
     }
@@ -26,7 +26,7 @@ if (isset($_POST["submit"])) {
         $bioErr = "Beksrivelse er påkrevd";
         $arrayErr["bioErr"] = $bioErr;
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/',$_POST["bio"])) {
+    } else if (!preg_match('/^[a-zA-Z0-9æÆøØåÅéÉ .,!?$%@#&+\-]+$/',$_POST["bio"])) {
         $bioErr = "Kun bokstaver, tall og tegn";
         $arrayErr["bioErr"] = $bioErr;
     }
@@ -38,7 +38,7 @@ if (isset($_POST["submit"])) {
         $localErr = "Sted er påkrevd";
         $arrayErr["localErr"] = $localErr;
         // sjekker om input er med riktige tegn.
-    } else if (!preg_match('/^[a-zA-Z0-9 .!?$%@#&+\-]+$/',$_POST["local"])) {
+    } else if (!preg_match('/^[a-zA-Z0-9æÆøØåÅéÉ .,!?$%@#&+\-]+$/',$_POST["local"])) {
         $localErr = "Kun bokstaver, tall og tegn";
         $arrayErr["localErr"] = $localErr;
     }
@@ -213,12 +213,11 @@ function displayImage($src) {
                         ?>
                     </div>
                     <label for="startdate">Startdato: *</label>
-
+                    <div class="form-floating">
                         <input class="form-control form-control-sm" type="datetime-local" id="startdate" name="startdate" autocomplete="off" required>
                         <?php 
                             if(isset($startdateErr)) displayerror($startdateErr); 
                             ?>
-
                     </div>
                     <label for="enddate">Sluttdato:</label>
                     <div class="form-floating">

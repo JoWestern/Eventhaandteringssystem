@@ -22,9 +22,9 @@ if (isset($_POST["edit"])) {
         $arrayErr = $newPassErr;
         $arrayErr = $confPassErr;
     } else if(
-        !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['oldpassword']) ||
-        !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['newpassword']) ||
-        !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['confirmpassword'])
+        !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%.,]{8,12}$/', $_POST['oldpassword']) ||
+        !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%.,]{8,12}$/', $_POST['newpassword']) ||
+        !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%.,]{8,12}$/', $_POST['confirmpassword'])
         ) {
         $oldPassErr = "Passordet møter ikke kravene";
         $arrayErr["passErr"] = $oldPassErr;

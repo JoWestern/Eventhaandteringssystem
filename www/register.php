@@ -11,7 +11,7 @@ if (isset($_POST["submit"])) {
             $fnameErr = "Fornavn mangler";
             $arrayErr = $fnameErr;
             // sjekker om input er med riktige tegn.
-        } else if (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['firstname'])) {
+        } else if (!preg_match("/^[a-zA-Z-' æÆøØåÅéÉ]*$/", $_POST['firstname'])) {
             $fnameErr = "Kun bokstaver og mellomrom";
             $arrayErr = $fnameErr;
         }
@@ -23,7 +23,7 @@ if (isset($_POST["submit"])) {
             $lastname = "";
             // sjekker om input er med riktige tegn.
         } else 
-        if (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['lastname'])) {
+        if (!preg_match("/^[a-zA-Z-' æÆøØåÅéÉ]*$/", $_POST['lastname'])) {
             $lnameErr = "Kun bokstaver og mellomrom";
             $arrayErr = $lnameErr;
         }
@@ -51,8 +51,8 @@ if (isset($_POST["submit"])) {
             $arrayErr = $passErr;
             // sjekker om input er med riktige tegn.
         } else if(
-            !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['password']) ||
-            !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['passwordconfirm']) 
+            !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%.,]{8,12}$/', $_POST['password']) ||
+            !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%.,]{8,12}$/', $_POST['passwordconfirm']) 
             ) {
             $passErr = 'Passord møter ikke kravene';
             $arrayErr = $passErr;
